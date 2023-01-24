@@ -1,5 +1,4 @@
-﻿using RoadMap.Clientes.MenuCliente;
-using RoadMap.Clientes.Model;
+﻿using RoadMap.Clientes.Model;
 using System;
 using System.Linq;
 
@@ -8,10 +7,66 @@ namespace RoadMap.Clientes
     public class Function : ICliente
     {
         MenuCliente.Menu menuCliente = new MenuCliente.Menu();
-        public void EditarCliente(string nome)
+
+        public void EditarCliente(string nomePesquisado)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Pesquisar Nome: ");
+            nomePesquisado = Console.ReadLine().ToString();
+
+            var clientesEncontrados = Cliente.LstClientes.Where(cliente => cliente.Nome.Contains(nomePesquisado)).ToList();
+            clientesEncontrados.ForEach(cliente =>
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Resultado da pesquisa: ");
+                Console.WriteLine("");
+
+                Console.WriteLine($"Cliente: {cliente.Nome}");
+                Console.WriteLine($"CPF: {cliente.Cpf}");
+            });
+            if (clientesEncontrados.Count == 0)
+            {
+                Console.WriteLine("");
+                Console.WriteLine($"Cliente {nomePesquisado.ToUpper()} não encontrado!");
+                Console.WriteLine("");
+                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                Console.ReadKey();
+                menuCliente.CabecalhoMenuCliente();
+            }
+            else
+            {
+                string nomeEditado = string.Empty;
+
+                Console.WriteLine(" ==================================");
+                Console.WriteLine(" |       Alterando Cliente        |");
+                Console.WriteLine(" ==================================");
+                Console.WriteLine("");
+
+                do
+                {
+                    Console.WriteLine("Digite alteração para o nome: ");
+                    nomeEditado = Console.ReadLine().ToString();
+
+                } while (string.IsNullOrEmpty(nomeEditado));
+
+                var clienteUpdate = Cliente.LstClientes.Where(cliente => cliente.Nome == nomePesquisado);
+
+                    foreach (var cliente in clienteUpdate)
+                    {
+                        cliente.Nome = nomeEditado;
+                    }
+
+                if (Cliente.LstClientes != null)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Cliente {nomeEditado.ToUpper()} alterado com sucesso!");
+                    Console.WriteLine();
+                    Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                    Console.ReadKey();
+                    menuCliente.CabecalhoMenuCliente();
+                }
+            }
         }
+
         public void BuscarPorNome(string nome)
         {
             //Cliente.BuscarClientePorNome(nome);
@@ -31,8 +86,6 @@ namespace RoadMap.Clientes
                 Console.WriteLine("Implementar o menu quer continuar a PESQUISA ?.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
-                
-
             });
             if (clientesEncontrados.Count == 0)
             {
@@ -43,8 +96,8 @@ namespace RoadMap.Clientes
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
-
         }
+
         public void BuscarTodosOsClientes()
         {
             var clientesNaoEncontrados = Cliente.LstClientes;
@@ -73,6 +126,7 @@ namespace RoadMap.Clientes
                 menuCliente.CabecalhoMenuCliente();
             }
         }
+
         public void CadastrarCliente()
         {
             string nome = string.Empty;
@@ -85,6 +139,14 @@ namespace RoadMap.Clientes
             string bairro = string.Empty;
             string cidade = string.Empty;
 
+            //while (Console.ReadKey().Key == ConsoleKey.Escape)
+            //{
+            //    Console.WriteLine("Saindo ... ");
+            //    Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+            //    Console.ReadKey();
+            //    menuCliente.CabecalhoMenuCliente();
+            //}
+
             do
             {
                 Console.WriteLine("Digite o nome do cliente: ");
@@ -96,8 +158,9 @@ namespace RoadMap.Clientes
             {
                 Console.WriteLine("Digite o CPF: ");
                 cpf = Console.ReadLine().ToString();
+                ValidarCPF(cpf);
 
-            } while (string.IsNullOrEmpty(cpf));
+            } while (ValidarCPF(cpf) == false);
 
             //do
             //{
@@ -150,9 +213,7 @@ namespace RoadMap.Clientes
 
             Cliente cliente = new Cliente(nome, cpf);
 
-            var resultado = Cliente.CadastrarCliente(cliente);
-
-            if (resultado == true)
+            if (Cliente.CadastrarCliente(cliente) == true)
             {
                 Console.WriteLine("Cliente cadastrado com sucesso!");
                 Console.WriteLine("Pressione qualquer tecla para prosseguir.");
@@ -162,9 +223,78 @@ namespace RoadMap.Clientes
             else
                 Console.WriteLine("Erro ao cadastrar cliente!");
         }
-        public void DeletarCliente(string nome)
+
+        public void DeletarCliente()
         {
-            throw new NotImplementedException();
+            string nomePesquisado = string.Empty;
+
+            do
+            {
+                Console.WriteLine("Digite o nome: ");
+                nomePesquisado = Console.ReadLine().ToString();
+
+            } while (string.IsNullOrEmpty(nomePesquisado));
+
+            var deletarCliente = Cliente.LstClientes.RemoveAll(cliente => cliente.Nome == nomePesquisado);
+
+            if (Cliente.LstClientes != null)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
+                Console.WriteLine();
+                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                Console.ReadKey();
+                menuCliente.CabecalhoMenuCliente();
+            }
+        }
+
+        public bool ValidarCPF(string cpf)
+        {
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            string tempCpf;
+            string digito;
+            int soma;
+            int resto;
+
+            cpf = cpf.Trim();
+            cpf = cpf.Replace(".", "").Replace("-", "");
+
+            if (cpf.Length != 11)
+                return false;
+
+            tempCpf = cpf.Substring(0, 9);
+            soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito = resto.ToString();
+
+            tempCpf = tempCpf + digito;
+
+            soma = 0;
+
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+            resto = soma % 11;
+
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+
+            digito = digito + resto.ToString();
+
+            return cpf.EndsWith(digito);
         }
 
         //public void CabecalhoMenuCliente()

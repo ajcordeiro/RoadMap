@@ -37,8 +37,6 @@ namespace RoadMap
                 {
                     case "1":
                         menuCliente.CabecalhoMenuCliente();
-                            
-                       // function.CabecalhoMenuCliente();
                         break;
                     case "2":
 
@@ -47,10 +45,12 @@ namespace RoadMap
                         Console.WriteLine(" Obrigado por utilizar o programa.");
                         Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                         Console.ReadKey();
-                        Environment.Exit(3);
+                        Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Opção de menu inválida!");
+                        Console.WriteLine(" Opção de menu inválida!");
+                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                        Console.ReadKey();
                         break;
                 }
             } while (opcao != "3");

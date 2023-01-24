@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoadMap.Clientes.MenuCliente
 {
@@ -12,30 +8,26 @@ namespace RoadMap.Clientes.MenuCliente
         public void CabecalhoMenuCliente()
         {
             string opcao = string.Empty;
-
-            Console.Clear();
-            Console.WriteLine(" ==================================");
-            Console.WriteLine(" |       Controle de Cliente      |");
-            Console.WriteLine(" ==================================");
-            Console.WriteLine(" | 1 - Pesquisar por Nome         |");
-            Console.WriteLine(" | 2 - Pesquisar Todos            |");
-            Console.WriteLine(" | 3 - Cadastar                   |");
-            Console.WriteLine(" | 4 - Editar                     |");
-            Console.WriteLine(" | 5 - Deletar                    |");
-            Console.WriteLine(" | 6 - Sair                       |");
-            Console.WriteLine(" ==================================");
-            Console.WriteLine("");
-            Console.Write("Digite sua opção: ");
-
-            opcao = Console.ReadLine().ToString();
-            ProcessarOpcaoMenuCliente(opcao);
-        }
-        public void ProcessarOpcaoMenuCliente(string opcao)
-        {
             string nome = string.Empty;
 
             do
             {
+                Console.Clear();
+                Console.WriteLine(" ==================================");
+                Console.WriteLine(" |       Controle de Cliente      |");
+                Console.WriteLine(" ==================================");
+                Console.WriteLine(" | 1 - Pesquisar por Nome         |");
+                Console.WriteLine(" | 2 - Pesquisar Todos            |");
+                Console.WriteLine(" | 3 - Cadastrar                  |");
+                Console.WriteLine(" | 4 - Editar                     |");
+                Console.WriteLine(" | 5 - Deletar                    |");
+                Console.WriteLine(" | 6 - Sair                       |");
+                Console.WriteLine(" ==================================");
+                Console.WriteLine("");
+                Console.Write(" Digite sua opção: ");
+
+                opcao = Console.ReadLine().ToString();
+
                 switch (opcao)
                 {
                     case "1":
@@ -57,28 +49,42 @@ namespace RoadMap.Clientes.MenuCliente
                         function.BuscarTodosOsClientes();
                         break;
                     case "3":
+                        Console.Clear();
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine(" |       Cadastrar  Cliente       |");
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine("");
                         function.CadastrarCliente();
                         break;
                     case "4":
-                        Console.WriteLine("Digite o Nome: ");
-                        nome = Console.ReadLine().ToString();
+                        Console.Clear();
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine(" |       Editar Cliente           |");
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine("");
                         function.EditarCliente(nome);
                         break;
                     case "5":
-                        Console.WriteLine("Digite o Nome: ");
-                        nome = Console.ReadLine().ToString();
-                        function.DeletarCliente(nome);
+                        Console.Clear();
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine(" |       Deletar Cliente          |");
+                        Console.WriteLine(" ==================================");
+                        Console.WriteLine("");
+                        function.DeletarCliente();
                         break;
                     case "6":
                         SairDoMenuCliente();
                         break;
                     default:
-                        Console.WriteLine("Opção de menu inválida!");
+                        Console.WriteLine(" Opção de menu inválida!");
+                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                        Console.ReadKey();
                         break;
                 }
 
             } while (opcao != "6");
         }
+        
         public void SairDoMenuCliente()
         {
             string opcao = string.Empty;
@@ -91,7 +97,7 @@ namespace RoadMap.Clientes.MenuCliente
                 switch (opcao)
                 {
                     case "S":
-                        Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                         Console.ReadKey();
                         Program.MenuInicial();
                         break;
@@ -99,7 +105,9 @@ namespace RoadMap.Clientes.MenuCliente
                         CabecalhoMenuCliente();
                         break;
                     default:
-                        Console.WriteLine("Opção de menu inválida!");
+                        Console.WriteLine(" Opção de menu inválida!");
+                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                        Console.ReadKey();
                         break;
                 }
             } while (opcao != "S" || opcao != "N");

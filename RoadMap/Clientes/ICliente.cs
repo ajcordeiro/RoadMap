@@ -12,6 +12,6 @@ namespace RoadMap.Clientes
         void BuscarPorNome(string nome);
         void BuscarTodosOsClientes();
         void EditarCliente(string nome);
-        void DeletarCliente(string nome);
+        void DeletarCliente();
     }
 }

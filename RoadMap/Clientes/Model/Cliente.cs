@@ -13,7 +13,17 @@ namespace RoadMap.Clientes.Model
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public DateTime DataCadastro { get; set; }
+        public DateTime DataAlteracao { get; set; }
 
+        public Cliente()
+        {
+
+        }
+        public Cliente(string nome)
+        {
+            Nome = nome;
+            DataAlteracao = DateTime.Now;
+        }
         public Cliente(string nome, string cpf)
         {
             Nome = nome;
@@ -25,6 +35,11 @@ namespace RoadMap.Clientes.Model
             LstClientes.Add(cliente);
             return LstClientes.Any();
         }
+
+        //public static bool EditarCliente(Cliente cliente)
+        //{
+        //    LstClientes.u
+        //}
 
         //public static void BuscarClientePorNome(string nome)
         //{

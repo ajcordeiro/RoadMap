@@ -9,7 +9,7 @@ namespace RoadMap.Clientes.MenuCliente
     public  interface IMenu
     {
         void CabecalhoMenuCliente();
-        void ProcessarOpcaoMenuCliente(string opcao);
+     
         void SairDoMenuCliente();
     }
 }
