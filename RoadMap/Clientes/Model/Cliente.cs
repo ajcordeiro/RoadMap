@@ -6,8 +6,6 @@ namespace RoadMap.Clientes.Model
 {
     public class Cliente : Contato
     {
-        static Function function = new Function();
-
         public static List<Cliente> LstClientes = new List<Cliente>();
 
         public string Nome { get; set; }
@@ -19,15 +17,17 @@ namespace RoadMap.Clientes.Model
         {
 
         }
-        public Cliente(string nome)
+        public Cliente(string nome, string telefone)
         {
             Nome = nome;
+            Telefone = telefone;
             DataAlteracao = DateTime.Now;
         }
-        public Cliente(string nome, string cpf)
+        public Cliente(string nome, string cpf, string telefone)
         {
             Nome = nome;
             Cpf = cpf;
+            Telefone = telefone;
             DataCadastro = DateTime.Now;
         }
         public static bool CadastrarCliente(Cliente cliente)
@@ -35,69 +35,5 @@ namespace RoadMap.Clientes.Model
             LstClientes.Add(cliente);
             return LstClientes.Any();
         }
-
-        //public static bool EditarCliente(Cliente cliente)
-        //{
-        //    LstClientes.u
-        //}
-
-        //public static void BuscarClientePorNome(string nome)
-        //{
-        //    var clientesEncontrados = LstClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
-
-        //    clientesEncontrados.ForEach(cliente =>
-        //    {
-        //        Console.WriteLine("");
-        //        Console.WriteLine("Resultado da pesquisa: ");
-
-        //        Console.WriteLine($"Cliente: {cliente.Nome}");
-        //        Console.WriteLine($"CPF: {cliente.Cpf}");
-
-        //        Console.WriteLine("");
-        //        Console.WriteLine("Pressione qualquer tecla para prosseguir.");
-        //        Console.WriteLine("Implementar o menu quer continuar a PESQUISA ?.");
-        //        Console.ReadKey();
-        //        function.CabecalhoMenuCliente();
-
-        //    });
-        //    if (clientesEncontrados.Count == 0)
-        //    {
-        //        Console.WriteLine("");
-        //        Console.WriteLine($"Cliente {nome.ToUpper()} não encontrado!");
-        //        Console.WriteLine("");
-        //        Console.WriteLine("Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        function.CabecalhoMenuCliente();
-        //    }
-        //}
-
-        //public static void BuscarTodosOsCliente()
-        //{
-        //    var clientesNaoEncontrados = LstClientes;
-
-        //    Console.WriteLine("Resultado da pesquisa: ");
-        //    Console.WriteLine("");
-        //    foreach (var cliente in clientesNaoEncontrados)
-        //    {
-        //        Console.WriteLine($"Cliente: {cliente.Nome}");
-        //        Console.WriteLine($"CPF: {cliente.Cpf}");
-        //        Console.WriteLine("");
-        //    }
-            
-        //    if (clientesNaoEncontrados.Count == 0)
-        //    {
-        //        Console.WriteLine("Clientes não encontrado!");
-        //        Console.WriteLine("");
-        //        Console.WriteLine("Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        function.CabecalhoMenuCliente();
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        function.CabecalhoMenuCliente();
-        //    }
-        //}
     }
 }
