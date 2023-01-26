@@ -106,7 +106,7 @@ namespace RoadMap.Clientes.MenuCliente
                     case "2":
                         Console.Clear();
                         Console.WriteLine(" ==================================");
-                        Console.WriteLine(" | Pesquisar Cliente Por CPF       |");
+                        Console.WriteLine(" | Pesquisar Cliente Por CPF      |");
                         Console.WriteLine(" ==================================");
                         Console.WriteLine("");
                         Console.WriteLine(" Digite o CPF: ");

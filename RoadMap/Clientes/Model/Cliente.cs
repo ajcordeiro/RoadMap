@@ -23,11 +23,13 @@ namespace RoadMap.Clientes.Model
             Telefone = telefone;
             DataAlteracao = DateTime.Now;
         }
-        public Cliente(string nome, string cpf, string telefone)
+        public Cliente(string nome, string cpf, string telefone, string email, string cep)
         {
             Nome = nome;
             Cpf = cpf;
             Telefone = telefone;
+            Email = email;
+            Cep = cep;
             DataCadastro = DateTime.Now;
         }
         public static bool CadastrarCliente(Cliente cliente)

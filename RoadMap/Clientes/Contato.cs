@@ -10,7 +10,7 @@ namespace RoadMap.Clientes
         public string Cidade { get; set; }
         public string Cep { get; set; }
         public string Complemento { get; set; }
-        public string CEmail { get; set; }
+        public string Email { get; set; }
         public Cliente cliente { get; set; }
     }
 }
