@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoadMap.Clientes.Validacoes;
+using System;
 
 namespace RoadMap.Clientes.MenuCliente
 {
@@ -111,11 +112,8 @@ namespace RoadMap.Clientes.MenuCliente
                         Console.WriteLine("");
                         Console.WriteLine(" Digite o CPF: ");
                         cpf = Console.ReadLine().ToString();
-                        function.ValidarCPF(cpf);
-                        if (function.ValidarCPF(cpf) == false)
+                        if (!ValidacoesCliente.ValidarCPF(cpf))
                         {
-                            Console.WriteLine();
-                            Console.WriteLine(" CPF inválido!");
                             Console.WriteLine();
                             Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                             Console.ReadKey();
