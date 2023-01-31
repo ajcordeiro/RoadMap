@@ -152,7 +152,7 @@ namespace RoadMap.Clientes.MenuCliente
 
             do
             {
-                Console.WriteLine("Deseja sair S/N?");
+                Console.WriteLine("Deseja sair [S/N]?");
                 opcao = Console.ReadLine().ToString().ToUpper();
 
                 switch (opcao)

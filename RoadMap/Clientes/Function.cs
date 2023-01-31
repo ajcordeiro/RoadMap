@@ -172,30 +172,22 @@ namespace RoadMap.Clientes
             string cep = string.Empty;
             string bairro = string.Empty;
             string cidade = string.Empty;
-            long ValidarNumeros;
-
-            //while (Console.ReadKey().Key == ConsoleKey.Escape)
-            //{
-            //    Console.WriteLine("Saindo ... ");
-            //    Console.WriteLine("Pressione qualquer tecla para prosseguir.");
-            //    Console.ReadKey();
-            //    menuCliente.CabecalhoMenuCliente();
-            //}
 
             do
             {
                 Console.WriteLine(" Digite o nome do cliente: ");
-                nome = Console.ReadLine().ToString();
+
+                nome = LerLetras();
                 Console.WriteLine();
 
             } while (string.IsNullOrEmpty(nome));
 
             do
             {
-                Console.WriteLine(" Digite o CPF: ");
                 Console.WriteLine();
-                ValidarNumeros = long.Parse(lerNumeros());
-                cpf = ValidarNumeros.ToString();
+                Console.WriteLine(" Digite o CPF: ");
+
+                cpf = lerNumeros();
                 Console.WriteLine();
 
             } while (!ValidarCPF(cpf));
@@ -204,10 +196,8 @@ namespace RoadMap.Clientes
             {
                 Console.WriteLine();
                 Console.WriteLine(" Digite o telefone: ");
-                //telefone = Console.ReadLine().ToString();
 
-                ValidarNumeros = long.Parse(lerNumeros());
-                telefone = ValidarNumeros.ToString();
+                telefone = lerNumeros();
                 Console.WriteLine();
 
             } while (string.IsNullOrEmpty(telefone));
@@ -218,53 +208,53 @@ namespace RoadMap.Clientes
                 Console.WriteLine(" Digite email");
                 email = Console.ReadLine().ToString();
 
-                if (!ValidarEmail(email))
-                    Console.WriteLine(" Email não é valido!");
-
-                Console.WriteLine();
-
-            } while (!ValidarEmail(email) || string.IsNullOrEmpty(email));
-
-            //do
-            //{
-            //    Console.WriteLine(" Digite o endereço: ");
-            //    endereco = Console.ReadLine().ToString();
-            //    Console.WriteLine();
-
-            //} while (string.IsNullOrEmpty(endereco));
-
-            //do
-            //{
-            //    Console.WriteLine(" Digite o complemento: ");
-            //    complemento = Console.ReadLine().ToString();
-            //    Console.WriteLine();
-
-            //} while (string.IsNullOrEmpty(complemento));
+            } while (!ValidarEmail(email));
 
             do
             {
-                Console.WriteLine(" Digite o cep: ");
-                ValidarNumeros = long.Parse(lerNumeros());
-                cep = ValidarNumeros.ToString();
+                Console.WriteLine(" Digite o endereço: ");
+                endereco = Console.ReadLine().ToString();
                 Console.WriteLine();
 
-            } while (ValidarNumeros == 0);
+            } while (string.IsNullOrEmpty(endereco));
 
-            //do
-            //{
-            //    Console.WriteLine(" Digite o bairro: ");
-            //    bairro = Console.ReadLine().ToString();
-            //    Console.WriteLine();
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine(" Digite o complemento: ");
 
-            //} while (string.IsNullOrEmpty(bairro));
+                complemento = Console.ReadLine().ToString();
+                Console.WriteLine();
 
-            //do
-            //{
-            //    Console.WriteLine(" Digite a cidade: ");
-            //    cidade = Console.ReadLine().ToString();
-            //    Console.WriteLine();
+            } while (string.IsNullOrEmpty(complemento));
 
-            //} while (string.IsNullOrEmpty(cidade));
+            do
+            {
+                Console.WriteLine();
+                Console.WriteLine(" Digite o cep: ");
+
+                cep = lerNumeros();
+                Console.WriteLine();
+
+            } while (string.IsNullOrEmpty(cep));
+
+            do
+            {
+                Console.WriteLine(" Digite o bairro: ");
+
+                bairro = LerLetras();
+                Console.WriteLine();
+
+            } while (string.IsNullOrEmpty(bairro));
+
+            do
+            {
+                Console.WriteLine(" Digite a cidade: ");
+
+                cidade = LerLetras();
+                Console.WriteLine();
+
+            } while (string.IsNullOrEmpty(cidade));
 
             Cliente cliente = new Cliente(nome, cpf, telefone, email, cep);
 
@@ -315,7 +305,11 @@ namespace RoadMap.Clientes
             cpf = cpf.Trim();
             cpf = cpf.Replace(".", "").Replace("-", "");
 
-            if (cpf.Length != 11)
+            if (string.IsNullOrEmpty(cpf))
+            {
+                return false;
+            }
+            else if  (cpf.Length != 11)
             {
                 Console.WriteLine(" CPF Inválido!");
                 return false;
@@ -359,7 +353,7 @@ namespace RoadMap.Clientes
         {
             ConsoleKeyInfo cki;
             bool continuarLoop = true;
-            string entrada = "0";
+            string entrada = string.Empty;
 
             while (continuarLoop)
                 if (Console.KeyAvailable)
@@ -384,13 +378,64 @@ namespace RoadMap.Clientes
                             break;
                     }
                 }
+            if (string.IsNullOrEmpty(entrada))
+            {
+                Console.WriteLine(" Campo não pode Ser Nullo !");
+            }
             return entrada;
+        }
+
+        public static string LerLetras()
+        {
+            ConsoleKeyInfo cki;
+            bool continuarLoop = true;
+            string entrada = string.Empty;
+
+            while (continuarLoop)
+                if (Console.KeyAvailable)
+                {
+                    cki = Console.ReadKey(true);
+                    switch (cki.Key)
+                    {
+                        case ConsoleKey.Backspace:
+                            if (entrada.Length == 0)
+                                continue;
+                            entrada = entrada.Remove(entrada.Length - 1);
+                            Console.Write("\b \b"); //Remove o último caractere digitado
+                            break;
+                        case ConsoleKey.Enter:
+                            continuarLoop = false;
+                            //entrada;
+                            break;
+                        case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.W) ||
+                                                  (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)):
+                            entrada += cki.KeyChar;
+                            Console.Write(cki.KeyChar);
+                            break;
+                    }
+                }
+            return entrada;
+
+
         }
 
         bool ValidarEmail(string eMail)
         {
-            // Return true if strIn is in valid e-mail format.
-            return Regex.IsMatch(eMail, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            bool ok = true;
+
+            if (string.IsNullOrEmpty(eMail))
+            {
+                Console.WriteLine("Email Vazio");
+                ok = false;
+            }
+            else
+            {
+                ok = Regex.IsMatch(eMail, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+
+                if (!ok)
+                    Console.WriteLine("Email invalido");
+            }
+            return ok;
         }
 
     }
