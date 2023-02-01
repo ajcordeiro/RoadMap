@@ -54,8 +54,6 @@ namespace RoadMap.Clientes.Validacoes
                     }
                 }
             return entrada;
-
-
         }
 
         public static string lerNumeros()
