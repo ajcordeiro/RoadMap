@@ -9,24 +9,30 @@ namespace RoadMap.Clientes
     {
         MenuCliente.Menu menuCliente = new MenuCliente.Menu();
 
+        ValidacoesCliente validacao = new ValidacoesCliente();
+
+        public Function()
+        {
+
+        }
+
         public void EditarCliente(string nomePesquisado)
         {
             string nomeEditado = string.Empty;
             string telefoneEditado = string.Empty;
 
-            Console.WriteLine(" Pesquisar Nome: ");
+            Console.Write(" Pesquisar Nome: ");
             nomePesquisado = Console.ReadLine().ToString();
 
-            var clientesEncontrados = Cliente.LstClientes.Where(cliente => cliente.Nome.Contains(nomePesquisado)).ToList();
+            var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nomePesquisado)).ToList();
             clientesEncontrados.ForEach(cliente =>
             {
                 Console.Clear();
                 Console.WriteLine(" ==================================");
                 Console.WriteLine(" |         Alterando Cliente       |");
-                Console.WriteLine(" |=================================|");
-                Console.WriteLine();
-                Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}");
-                Console.WriteLine();
+                Console.WriteLine(" |=================================|\n");
+
+                Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}\n");
                 Console.WriteLine(" Digite alteração para o nome: ");
                 nomeEditado = Console.ReadLine().ToString();
 
@@ -36,12 +42,9 @@ namespace RoadMap.Clientes
                     cliente.Nome = nomeEditado;
 
                 Console.WriteLine($"Cliente: {cliente.Nome}");
-                Console.WriteLine();
                 Console.WriteLine($" CPF:{Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
 
-                Console.WriteLine();
                 Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)\0000\-0000")}");
-                Console.WriteLine();
                 Console.WriteLine(" Digite alteração para o Telefone: ");
                 telefoneEditado = Console.ReadLine().ToString();
 
@@ -53,18 +56,14 @@ namespace RoadMap.Clientes
             });
             if (clientesEncontrados.Count == 0)
             {
-                Console.WriteLine("");
                 Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} não encontrado!");
-                Console.WriteLine("");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
             else
             {
-                Console.WriteLine();
                 Console.WriteLine($" Cliente {nomeEditado.ToUpper()} alterado com sucesso!");
-                Console.WriteLine();
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
@@ -73,28 +72,29 @@ namespace RoadMap.Clientes
 
         public void BuscarPorNome(string nome)
         {
-            var clientesEncontrados = Cliente.LstClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
+            var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
 
             clientesEncontrados.ForEach(cliente =>
             {
-                Console.WriteLine("");
-                Console.WriteLine(" Resultado da pesquisa: ");
+                Console.WriteLine("\n");
+                Console.WriteLine(" Resultado da pesquisa:\n ");
 
-                Console.WriteLine($" Cliente: {cliente.Nome}");
+                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
                 Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-
-                Console.WriteLine("");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+                Console.WriteLine();
+                Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             });
             if (clientesEncontrados.Count == 0)
             {
-                Console.WriteLine("");
-                Console.WriteLine($" Cliente {nome.ToUpper()} não encontrado!");
-                Console.WriteLine("");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine("\n");
+                Console.WriteLine($" Cliente:{nome.ToUpper()} não encontrado!");
+                Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
@@ -102,31 +102,32 @@ namespace RoadMap.Clientes
 
         public void BuscarTodosOsClientes()
         {
-            var clientesNaoEncontrados = Cliente.LstClientes;
+            var clientesNaoEncontrados = Cliente.ListaClientes;
 
-            Console.WriteLine(" Resultado da pesquisa: ");
-            Console.WriteLine("");
+            Console.WriteLine(" Resultado da pesquisa:\n ");
+
             foreach (var cliente in clientesNaoEncontrados)
             {
-                Console.WriteLine($" Cliente: {cliente.Nome}");
+                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
                 Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Email: {cliente.Email}");
-                Console.WriteLine($" Cep: {Convert.ToUInt64(cliente.Cep).ToString(@"00000\-000")}");
-                Console.WriteLine("");
+                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+                Console.WriteLine();
+                Console.WriteLine("------------------------------------------------------");
             }
 
             if (clientesNaoEncontrados.Count == 0)
             {
                 Console.WriteLine(" Clientes não cadastrados na base!");
-                Console.WriteLine("");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
             else
             {
-                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
+                Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
@@ -134,27 +135,28 @@ namespace RoadMap.Clientes
 
         public void BuscarPorCpf(string cpf)
         {
-            var clientesEncontradosPorCpf = Cliente.LstClientes.Where(cliente => cliente.Cpf.Contains(cpf)).ToList();
+            var clientesEncontradosPorCpf = Cliente.ListaClientes.Where(cliente => cliente.Cpf.Contains(cpf)).ToList();
 
             clientesEncontradosPorCpf.ForEach(cliente =>
             {
-                Console.WriteLine("");
-                Console.WriteLine(" Resultado da pesquisa: ");
+                Console.WriteLine("\n");
+                Console.WriteLine(" Resultado da pesquisa:\n ");
 
-                Console.WriteLine($" Cliente: {cliente.Nome}");
+                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-                Console.WriteLine($" Telefone:{Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-
-                Console.WriteLine("");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
+                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
+                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+                Console.WriteLine();
+                Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             });
             if (clientesEncontradosPorCpf.Count == 0)
             {
-                Console.WriteLine("");
+                Console.WriteLine("\n");
                 Console.WriteLine($" CPF {Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00")} não encontrado!");
-                Console.WriteLine("");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
@@ -175,18 +177,17 @@ namespace RoadMap.Clientes
 
             do
             {
-                Console.WriteLine(" Digite o nome do cliente: ");
-
-                nome = ValidacoesCliente.LerLetras();
+                Console.Write(" Digite o nome: ");
+                nome = validacao.LerLetras();
                 Console.WriteLine();
+                nome = nome.Trim().ToLower();
 
-            } while (string.IsNullOrEmpty(nome));
+            } while (!validacao.ValidaCampoVazio(nome));
 
             do
             {
                 Console.WriteLine();
-                Console.WriteLine(" Digite o CPF: ");
-
+                Console.Write(" Digite o CPF: ");
                 cpf = ValidacoesCliente.lerNumeros();
                 Console.WriteLine();
 
@@ -195,8 +196,7 @@ namespace RoadMap.Clientes
             do
             {
                 Console.WriteLine();
-                Console.WriteLine(" Digite o telefone: ");
-
+                Console.Write(" Digite o telefone: ");
                 telefone = ValidacoesCliente.lerNumeros();
                 Console.WriteLine();
 
@@ -205,34 +205,29 @@ namespace RoadMap.Clientes
             do
             {
                 Console.WriteLine();
-                Console.WriteLine(" Digite email");
+                Console.Write(" Digite email: ");
                 email = Console.ReadLine().ToString();
 
             } while (!ValidacoesCliente.ValidarEmail(email));
 
             do
             {
-                Console.WriteLine(" Digite o endereço: ");
+                Console.WriteLine();
+                Console.Write(" Digite o endereço: ");
                 endereco = Console.ReadLine().ToString();
                 Console.WriteLine();
 
-            } while (string.IsNullOrEmpty(endereco));
+            } while (string.IsNullOrEmpty(endereco.TrimStart()));
+
+            Console.Write(" Digite o complemento: ");
+            complemento = Console.ReadLine().ToString();
+            Console.WriteLine();
+            if (string.IsNullOrEmpty(complemento.TrimStart()))
+                complemento = "NA";
 
             do
             {
-                Console.WriteLine();
-                Console.WriteLine(" Digite o complemento: ");
-
-                complemento = Console.ReadLine().ToString();
-                Console.WriteLine();
-
-            } while (string.IsNullOrEmpty(complemento));
-
-            do
-            {
-                Console.WriteLine();
-                Console.WriteLine(" Digite o cep: ");
-
+                Console.Write(" Digite o cep: ");
                 cep = ValidacoesCliente.lerNumeros();
                 Console.WriteLine();
 
@@ -240,28 +235,29 @@ namespace RoadMap.Clientes
 
             do
             {
-                Console.WriteLine(" Digite o bairro: ");
-
-                bairro = ValidacoesCliente.LerLetras();
+                Console.WriteLine();
+                Console.Write(" Digite o bairro: ");
+                bairro = validacao.LerLetras();
                 Console.WriteLine();
 
-            } while (string.IsNullOrEmpty(bairro));
+            } while (string.IsNullOrEmpty(bairro.TrimStart()));
 
             do
             {
-                Console.WriteLine(" Digite a cidade: ");
-
-                cidade = ValidacoesCliente.LerLetras();
+                Console.WriteLine();
+                Console.Write(" Digite a cidade: ");
+                cidade = validacao.LerLetras();
                 Console.WriteLine();
 
-            } while (string.IsNullOrEmpty(cidade));
+            } while (string.IsNullOrEmpty(cidade.TrimStart()));
 
-            Cliente cliente = new Cliente(nome, cpf, telefone, email, cep);
+            Cliente cliente = new Cliente(nome, cpf, telefone, email, endereco, complemento, cep, bairro, cidade);
 
-            if (Cliente.CadastrarCliente(cliente))
+            if (cliente.CadastrarCliente(cliente))
             {
+                Console.WriteLine();
                 Console.WriteLine(" Cliente cadastrado com sucesso!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();
             }
@@ -280,13 +276,11 @@ namespace RoadMap.Clientes
 
             } while (string.IsNullOrEmpty(nomePesquisado));
 
-            var deletarCliente = Cliente.LstClientes.RemoveAll(cliente => cliente.Nome == nomePesquisado);
+            var deletarCliente = Cliente.ListaClientes.RemoveAll(cliente => cliente.Nome == nomePesquisado);
 
-            if (Cliente.LstClientes != null)
+            if (Cliente.ListaClientes != null)
             {
-                Console.WriteLine();
                 Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
-                Console.WriteLine();
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 menuCliente.CabecalhoMenuCliente();

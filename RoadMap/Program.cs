@@ -1,6 +1,7 @@
 ﻿using RoadMap.Clientes;
 using RoadMap.Clientes.MenuCliente;
 using RoadMap.Clientes.Model;
+using RoadMap.Clientes.Validacoes;
 using System;
 
 namespace RoadMap
@@ -21,17 +22,16 @@ namespace RoadMap
             do
             {
                 Console.Clear();
-                Console.WriteLine(" ==================================");
-                Console.WriteLine(" |         Web Controle           |");
-                Console.WriteLine(" |================================|");
-                Console.WriteLine(" | 1 - Cliente                    |");
-                Console.WriteLine(" | 2 - Produto                    |");
-                Console.WriteLine(" | 3 - Sair do Programa           |");
-                Console.WriteLine(" ==================================");
-                Console.WriteLine();
+                Console.WriteLine(" ======================================================");
+                Console.WriteLine(" |                     Web Controle                   |");
+                Console.WriteLine(" |====================================================|");
+                Console.WriteLine(" | 1 - Cliente                                        |");
+                Console.WriteLine(" | 2 - Produto                                        |");
+                Console.WriteLine(" | 3 - Sair do Programa                               |");
+                Console.WriteLine(" ======================================================\n");
                 Console.Write(" Digite sua opção: ");
 
-                opcao = Console.ReadLine();
+                opcao = ValidacoesCliente.lerNumeros();
 
                 switch (opcao)
                 {
@@ -42,14 +42,16 @@ namespace RoadMap
 
                         break;
                     case "3":
+                        Console.WriteLine("\n");
                         Console.WriteLine(" Obrigado por utilizar o programa.");
-                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                        Console.Write(" Pressione qualquer tecla para prosseguir.");
                         Console.ReadKey();
                         Environment.Exit(0);
                         break;
                     default:
+                        Console.WriteLine("\n");
                         Console.WriteLine(" Opção de menu inválida!");
-                        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                        Console.Write(" Pressione qualquer tecla para prosseguir.");
                         Console.ReadKey();
                         break;
                 }

@@ -5,26 +5,26 @@ namespace RoadMap.Clientes.Validacoes
 {
     public class ValidacoesCliente
     {
-       public static bool ValidarEmail(string eMail)
+        public static bool ValidarEmail(string email)
         {
             bool ok = true;
 
-            if (string.IsNullOrEmpty(eMail))
+            if (string.IsNullOrEmpty(email))
             {
-                Console.WriteLine("Email Vazio");
+                Console.Write(" Email não pode ser vazio");
                 ok = false;
             }
             else
             {
-                ok = Regex.IsMatch(eMail, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+                ok = Regex.IsMatch(email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
 
                 if (!ok)
-                    Console.WriteLine("Email invalido");
+                    Console.Write(" Email digitado inválido");
             }
             return ok;
         }
 
-        public static string LerLetras()
+        public string LerLetras()
         {
             ConsoleKeyInfo cki;
             bool continuarLoop = true;
@@ -44,10 +44,10 @@ namespace RoadMap.Clientes.Validacoes
                             break;
                         case ConsoleKey.Enter:
                             continuarLoop = false;
-                            //entrada;
                             break;
                         case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.W) ||
                                                   (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)):
+                            
                             entrada += cki.KeyChar;
                             Console.Write(cki.KeyChar);
                             break;
@@ -146,6 +146,20 @@ namespace RoadMap.Clientes.Validacoes
             digito = digito + resto.ToString();
 
             return cpf.EndsWith(digito);
+        }
+
+        public bool ValidaCampoVazio(string campo)
+        {
+            bool valida = true;
+
+            if (string.IsNullOrEmpty(campo))
+            {
+                Console.WriteLine(" Campo não pode ser nulo!.");
+                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.ReadKey();
+                return false;
+            }
+            return valida;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace RoadMap.Clientes.Model
 {
-    public class Cliente : Contato
+    public class Cliente : Contato, IClienteTeste
     {
-        public static List<Cliente> LstClientes = new List<Cliente>();
+        public static List<Cliente> ListaClientes = new List<Cliente>();
 
         public string Nome { get; set; }
         public string Cpf { get; set; }
@@ -23,19 +23,28 @@ namespace RoadMap.Clientes.Model
             Telefone = telefone;
             DataAlteracao = DateTime.Now;
         }
-        public Cliente(string nome, string cpf, string telefone, string email, string cep)
+        public Cliente(string nome, string cpf, string telefone, string email, string endereco, string complemento, string cep, string bairro, string cidade)
         {
             Nome = nome;
             Cpf = cpf;
             Telefone = telefone;
             Email = email;
+            Endereco = endereco;
+            Complemento = complemento;
             Cep = cep;
+            Bairro = bairro;
+            Cidade = cidade;
             DataCadastro = DateTime.Now;
         }
-        public static bool CadastrarCliente(Cliente cliente)
+        public bool CadastrarCliente(Cliente cliente)
         {
-            LstClientes.Add(cliente);
-            return LstClientes.Any();
+            ListaClientes.Add(cliente);
+            return ListaClientes.Any();
+        }
+
+        public bool CadastrarCliente()
+        {
+            throw new NotImplementedException();
         }
     }
 }
