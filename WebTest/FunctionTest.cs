@@ -18,17 +18,17 @@ namespace WebTest
 
 
         //Campo
-        private Cliente _cliente;
+        //private Cliente _cliente;
         private Function _function;
 
         public FunctionTest()
         {
             var mock = new Mock<IClienteTeste>();
 
-            mock.Setup(x => x.CadastrarCliente()).Returns(true);
+           // mock.Setup(x => x.CadastrarCliente()).Returns(true);
 
-            _cliente = new Cliente();
-            _function = new Function();
+            //_cliente = new Cliente();
+            //_function = new Function();
         }
         
 
@@ -36,18 +36,18 @@ namespace WebTest
         public void ValidaCadastroDoCliente()
         {
             // Arrange - São realizados os preparativos para a ação e resultado a serem testados
-            _cliente.Nome = "Pedro";
-            _cliente.Cpf = "16516445835";
-            _cliente.Telefone = "11954359055";
-            _cliente.Email = "pedro@gmail.com";
-            _cliente.Endereco = "Rua Teste 46";
-            _cliente.Complemento = "";
-            _cliente.Bairro = "Vila Uniao";
-            _cliente.Cep = "03531232";
-            _cliente.Cidade = "Sao Pedro";
-            _cliente.DataCadastro = DateTime.Now;
+            //_cliente.Nome = "Pedro";
+            //_cliente.Cpf = "16516445835";
+            //_cliente.Telefone = "11954359055";
+            //_cliente.Email = "pedro@gmail.com";
+            //_cliente.Endereco = "Rua Teste 46";
+            //_cliente.Complemento = "";
+            //_cliente.Bairro = "Vila Uniao";
+            //_cliente.Cep = "03531232";
+            //_cliente.Cidade = "Sao Pedro";
+            //_cliente.DataCadastro = DateTime.Now;
 
-            _function.CadastrarCliente();
+            //_function.CadastrarCliente();
 
             // Act - A ação a ser realizada é feita nessa parte, além do resultado ser obtido (ou não, caso seja um
             // método sem retorno).

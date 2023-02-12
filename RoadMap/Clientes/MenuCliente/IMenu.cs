@@ -2,8 +2,8 @@
 {
     public interface IMenu
     {
-        void CabecalhoMenuCliente();
-        void CabecalhoMenuPesquisar();
-        void SairDoMenuCliente();
+        //void CabecalhoMenuCliente(string opcao);
+       // void CabecalhoMenuPesquisar();
+       // void SairDoMenuCliente(string opcao);
     }
 }

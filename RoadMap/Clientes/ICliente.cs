@@ -1,4 +1,5 @@
 ﻿using RoadMap.Clientes.Model;
+using RoadMap.Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,13 @@ namespace RoadMap.Clientes
 {
     public interface ICliente
     {
-        void CadastrarCliente();
-        void BuscarPorNome(string nome);
-        void BuscarTodosOsClientes();
+        public void CadastrarCliente();
+
+       // void GetNome(string nome);
+        //void GetCpf(string cpf);
+        //void GetAllClientes();
         void EditarCliente(string nome);
         void DeletarCliente();
+
     }
 }

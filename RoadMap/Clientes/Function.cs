@@ -2,15 +2,19 @@
 using System;
 using System.Linq;
 using RoadMap.Clientes.Validacoes;
+using RoadMap.Controller;
+using RoadMap.Clientes.MenuCliente;
 
 namespace RoadMap.Clientes
 {
     public class Function : ICliente
     {
-        MenuCliente.Menu menuCliente = new MenuCliente.Menu();
+        MenuCliente.MenuInicialCliente menuCliente = new MenuCliente.MenuInicialCliente();
 
-        ValidacoesCliente validacao = new ValidacoesCliente();
+       // ValidacoesCliente validacao = new ValidacoesCliente();
 
+        string nome = string.Empty;
+        string opcao = string.Empty;
         public Function()
         {
 
@@ -20,6 +24,7 @@ namespace RoadMap.Clientes
         {
             string nomeEditado = string.Empty;
             string telefoneEditado = string.Empty;
+            string opcao = string.Empty;
 
             Console.Write(" Pesquisar Nome: ");
             nomePesquisado = Console.ReadLine().ToString();
@@ -59,109 +64,110 @@ namespace RoadMap.Clientes
                 Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} não encontrado!");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
+                MenuInicialCliente.CabecalhoMenuCliente();
             }
             else
             {
                 Console.WriteLine($" Cliente {nomeEditado.ToUpper()} alterado com sucesso!");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
+                MenuInicialCliente.CabecalhoMenuCliente();
             }
         }
 
-        public void BuscarPorNome(string nome)
-        {
-            var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
+        //public void GetNome(string nome)
+        //{
+        //    var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
 
-            clientesEncontrados.ForEach(cliente =>
-            {
-                Console.WriteLine("\n");
-                Console.WriteLine(" Resultado da pesquisa:\n ");
+        //    clientesEncontrados.ForEach(cliente =>
+        //    {
+        //        Console.WriteLine("\n");
+        //        Console.WriteLine(" Resultado da pesquisa:\n ");
 
-                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-                Console.WriteLine();
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            });
-            if (clientesEncontrados.Count == 0)
-            {
-                Console.WriteLine("\n");
-                Console.WriteLine($" Cliente:{nome.ToUpper()} não encontrado!");
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            }
-        }
+        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
+        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
+        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
+        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+        //        Console.WriteLine();
+        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    });
+        //    if (clientesEncontrados.Count == 0)
+        //    {
+        //        Console.WriteLine("\n");
+        //        Console.WriteLine($" Cliente:{nome.ToUpper()} não encontrado!");
+        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    }
+        //}
 
-        public void BuscarTodosOsClientes()
-        {
-            var clientesNaoEncontrados = Cliente.ListaClientes;
+        //public void GetAllClientes()
+        //{
+        //    var clientesNaoEncontrados = Cliente.ListaClientes;
 
-            Console.WriteLine(" Resultado da pesquisa:\n ");
+        //    Console.WriteLine(" Resultado da pesquisa:\n ");
 
-            foreach (var cliente in clientesNaoEncontrados)
-            {
-                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-                Console.WriteLine();
-                Console.WriteLine("------------------------------------------------------");
-            }
+        //    foreach (var cliente in clientesNaoEncontrados)
+        //    {
+        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
+        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
+        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
+        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+        //        Console.WriteLine();
+        //        Console.WriteLine("------------------------------------------------------");
+        //    }
 
-            if (clientesNaoEncontrados.Count == 0)
-            {
-                Console.WriteLine(" Clientes não cadastrados na base!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            }
-            else
-            {
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            }
-        }
+        //    if (clientesNaoEncontrados.Count == 0)
+        //    {
+        //        Console.WriteLine(" Clientes não cadastrados na base!");
+        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    }
+        //    else
+        //    {
+        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    }
+        //}
 
-        public void BuscarPorCpf(string cpf)
-        {
-            var clientesEncontradosPorCpf = Cliente.ListaClientes.Where(cliente => cliente.Cpf.Contains(cpf)).ToList();
+        //public void GetCpf(string cpf)
+        //{
 
-            clientesEncontradosPorCpf.ForEach(cliente =>
-            {
-                Console.WriteLine("\n");
-                Console.WriteLine(" Resultado da pesquisa:\n ");
+        //    var clientesEncontradosPorCpf = Cliente.ListaClientes.Where(cliente => cliente.Cpf.Contains(cpf)).ToList();
 
-                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-                Console.WriteLine();
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            });
-            if (clientesEncontradosPorCpf.Count == 0)
-            {
-                Console.WriteLine("\n");
-                Console.WriteLine($" CPF {Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00")} não encontrado!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
-            }
-        }
+        //    clientesEncontradosPorCpf.ForEach(cliente =>
+        //    {
+        //        Console.WriteLine("\n");
+        //        Console.WriteLine(" Resultado da pesquisa:\n ");
+
+        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
+        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
+        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
+        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
+        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+        //        Console.WriteLine();
+        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    });
+        //    if (clientesEncontradosPorCpf.Count == 0)
+        //    {
+        //        Console.WriteLine("\n");
+        //        Console.WriteLine($" CPF {Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00")} não encontrado!");
+        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    }
+        //}
 
         public void CadastrarCliente()
         {
@@ -178,11 +184,11 @@ namespace RoadMap.Clientes
             do
             {
                 Console.Write(" Digite o nome: ");
-                nome = validacao.LerLetras();
+                nome = ValidacoesCliente.LerLetras();
                 Console.WriteLine();
                 nome = nome.Trim().ToLower();
 
-            } while (!validacao.ValidaCampoVazio(nome));
+            } while (!ValidacoesCliente.ValidaCampoVazio(nome));
 
             do
             {
@@ -237,7 +243,7 @@ namespace RoadMap.Clientes
             {
                 Console.WriteLine();
                 Console.Write(" Digite o bairro: ");
-                bairro = validacao.LerLetras();
+                bairro = ValidacoesCliente.LerLetras();
                 Console.WriteLine();
 
             } while (string.IsNullOrEmpty(bairro.TrimStart()));
@@ -246,20 +252,20 @@ namespace RoadMap.Clientes
             {
                 Console.WriteLine();
                 Console.Write(" Digite a cidade: ");
-                cidade = validacao.LerLetras();
+                cidade = ValidacoesCliente.LerLetras();
                 Console.WriteLine();
 
             } while (string.IsNullOrEmpty(cidade.TrimStart()));
 
-            Cliente cliente = new Cliente(nome, cpf, telefone, email, endereco, complemento, cep, bairro, cidade);
+            ClienteController clienteController = new ClienteController(nome, cpf, telefone, email, endereco, complemento, cep, bairro, cidade);
 
-            if (cliente.CadastrarCliente(cliente))
+            if (clienteController.CadastrarCliente(clienteController))
             {
                 Console.WriteLine();
                 Console.WriteLine(" Cliente cadastrado com sucesso!");
                 Console.Write(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
+                MenuInicialCliente.CabecalhoMenuCliente();
             }
             else
                 Console.WriteLine(" Erro ao cadastrar cliente!");
@@ -283,8 +289,10 @@ namespace RoadMap.Clientes
                 Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
                 Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                menuCliente.CabecalhoMenuCliente();
+                MenuInicialCliente.CabecalhoMenuCliente();
             }
         }
+
+        
     }
 }

@@ -11,6 +11,5 @@ namespace RoadMap.Clientes
         public string Cep { get; set; }
         public string Complemento { get; set; }
         public string Email { get; set; }
-        public Cliente cliente { get; set; }
     }
 }

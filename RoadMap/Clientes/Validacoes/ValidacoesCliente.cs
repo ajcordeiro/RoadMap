@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace RoadMap.Clientes.Validacoes
 {
-    public class ValidacoesCliente
+    public static class ValidacoesCliente
     {
         public static bool ValidarEmail(string email)
         {
@@ -24,7 +24,7 @@ namespace RoadMap.Clientes.Validacoes
             return ok;
         }
 
-        public string LerLetras()
+        public static string LerLetras()
         {
             ConsoleKeyInfo cki;
             bool continuarLoop = true;
@@ -148,7 +148,7 @@ namespace RoadMap.Clientes.Validacoes
             return cpf.EndsWith(digito);
         }
 
-        public bool ValidaCampoVazio(string campo)
+        public static bool ValidaCampoVazio(string campo)
         {
             bool valida = true;
 
