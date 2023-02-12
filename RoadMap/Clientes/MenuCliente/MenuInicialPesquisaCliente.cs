@@ -11,98 +11,21 @@ namespace RoadMap.Clientes.MenuCliente
     {
         public static Function function = new Function();
 
-        //ValidacoesCliente validacao; // = new ValidacoesCliente();
-
         public static void CabecalhoMenuPesquisar()
         {
             string opcao = string.Empty;
             string nome = string.Empty;
             string cpf = string.Empty;
 
-           // HandleMenuOptions(opcao);
             do
             {
                 Console.Clear();
                 DrawScreen();
                 WriteOptions();
-                //Console.Clear();
-                //Console.WriteLine(" ======================================================");
-                //Console.WriteLine(" |                 Pesquisar Cliente                  |");
-                //Console.WriteLine(" ======================================================");
-                //Console.WriteLine(" | 1 - Pesquisar por Nome                             |");
-                //Console.WriteLine(" | 2 - Pesquisar por CPF                              |");
-                //Console.WriteLine(" | 3 - Pesquisar Todos                                |");
-                //Console.WriteLine(" | 4 - Sair                                           |");
-                //Console.WriteLine(" ======================================================\n");
-                //Console.Write(" Digite sua opção: ");
-
-                //opcao = ValidacoesCliente.lerNumeros();
-
-                //switch (opcao)
-                //{
-                //    case "1":
-                //        do
-                //        {
-                //            Console.Clear();
-                //            Console.WriteLine(" ======================================================");
-                //            Console.WriteLine(" |            Pesquisar Cliente Por Nome              |");
-                //            Console.WriteLine(" ======================================================\n");
-                //            Console.Write(" Digite o Nome: ");
-
-                //            nome = ValidacoesCliente.LerLetras();
-
-                //            if (ValidacoesCliente.ValidaCampoVazio(nome))
-                //                function.GetNome((nome).Trim().ToLower());
-
-                //        } while (!ValidacoesCliente.ValidaCampoVazio(nome));
-
-                //        break;
-
-                //    case "2":
-                //        Console.Clear();
-                //        Console.WriteLine(" ======================================================");
-                //        Console.WriteLine(" |              Pesquisar Cliente Por CPF             |");
-                //        Console.WriteLine(" ======================================================\n");
-                //        Console.Write(" Digite o CPF: ");
-                //        cpf = ValidacoesCliente.lerNumeros();
-
-                //        if (!ValidacoesCliente.ValidarCPF(cpf))
-                //        {
-                //            Console.Write(" Pressione qualquer tecla para prosseguir.");
-                //            Console.ReadKey();
-                //        }
-                //        else
-                //        {
-                //            function.GetCpf(cpf);
-                //        }
-                //        break;
-
-                //    case "3":
-                //        Console.Clear();
-                //        Console.WriteLine(" ======================================================");
-                //        Console.WriteLine(" |                 Pesquisar Todos                    |");
-                //        Console.WriteLine(" ======================================================\n");
-                //        function.GetAllClientes();
-                //        break;
-
-                //    case "4":
-                //        opcao = string.Empty;
-                //        DrawScreen();
-                //        WriteOptions();
-                //       // MenuInicialCliente.CabecalhoMenuCliente(opcao);
-                //        //SairDoMenuCliente(opcao);
-                //        break;
-
-                //    default:
-                //        Console.WriteLine();
-                //        Console.WriteLine(" Opção de menu inválida!");
-                //        Console.Write(" Pressione qualquer tecla para prosseguir.");
-                //        Console.ReadKey();
-                //        break;
-                //        }
-
+                
             } while (opcao != "4");
         }
+
         public static void DrawScreen()
         {
             Console.Write("+");
@@ -135,7 +58,7 @@ namespace RoadMap.Clientes.MenuCliente
         public static void WriteOptions()
         {
             Console.SetCursorPosition(32, 1);
-            Console.WriteLine(" Pesquisar Cliente");
+            Console.WriteLine("Pesquisar Cliente");
             Console.SetCursorPosition(1, 2);
             for (int i = 0; i <= 80; i++)
             {
@@ -176,8 +99,8 @@ namespace RoadMap.Clientes.MenuCliente
                     break;
                 default:
                     Console.WriteLine("\n");
-                    Console.WriteLine(" Opção de menu inválida!");
-                    Console.Write(" Pressione qualquer tecla para prosseguir.");
+                    Console.WriteLine("Opção de menu inválida!");
+                    Console.Write("Pressione qualquer tecla para prosseguir.");
                     Console.ReadKey();
                     Console.Clear();
                     DrawScreen();
@@ -185,6 +108,5 @@ namespace RoadMap.Clientes.MenuCliente
                     break;
             }
         }
-
     }
 }

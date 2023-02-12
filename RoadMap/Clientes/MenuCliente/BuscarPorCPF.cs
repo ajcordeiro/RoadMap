@@ -76,7 +76,7 @@ namespace RoadMap.Clientes.MenuCliente
                 Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
                 Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
                 Console.WriteLine();
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
+                Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 MenuInicialCliente.CabecalhoMenuCliente();
             });

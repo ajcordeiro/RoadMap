@@ -6,8 +6,14 @@ namespace RoadMap.MenuInicial
 {
     public static class MenuAbertura
     {
+        public static void MAbertura()
+        {
+            DrawScreen();
+            WriteOptions();
+        }
         public static void DrawScreen()
         {
+            Console.Clear();
             Console.Write("+");
             for (int i = 0; i <= 80; i++)
             {

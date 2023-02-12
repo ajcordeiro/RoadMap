@@ -11,8 +11,6 @@ namespace RoadMap.Clientes
     {
         MenuCliente.MenuInicialCliente menuCliente = new MenuCliente.MenuInicialCliente();
 
-       // ValidacoesCliente validacao = new ValidacoesCliente();
-
         string nome = string.Empty;
         string opcao = string.Empty;
         public Function()
@@ -74,100 +72,6 @@ namespace RoadMap.Clientes
                 MenuInicialCliente.CabecalhoMenuCliente();
             }
         }
-
-        //public void GetNome(string nome)
-        //{
-        //    var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
-
-        //    clientesEncontrados.ForEach(cliente =>
-        //    {
-        //        Console.WriteLine("\n");
-        //        Console.WriteLine(" Resultado da pesquisa:\n ");
-
-        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-        //        Console.WriteLine();
-        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    });
-        //    if (clientesEncontrados.Count == 0)
-        //    {
-        //        Console.WriteLine("\n");
-        //        Console.WriteLine($" Cliente:{nome.ToUpper()} não encontrado!");
-        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    }
-        //}
-
-        //public void GetAllClientes()
-        //{
-        //    var clientesNaoEncontrados = Cliente.ListaClientes;
-
-        //    Console.WriteLine(" Resultado da pesquisa:\n ");
-
-        //    foreach (var cliente in clientesNaoEncontrados)
-        //    {
-        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-        //        Console.WriteLine();
-        //        Console.WriteLine("------------------------------------------------------");
-        //    }
-
-        //    if (clientesNaoEncontrados.Count == 0)
-        //    {
-        //        Console.WriteLine(" Clientes não cadastrados na base!");
-        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    }
-        //    else
-        //    {
-        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    }
-        //}
-
-        //public void GetCpf(string cpf)
-        //{
-
-        //    var clientesEncontradosPorCpf = Cliente.ListaClientes.Where(cliente => cliente.Cpf.Contains(cpf)).ToList();
-
-        //    clientesEncontradosPorCpf.ForEach(cliente =>
-        //    {
-        //        Console.WriteLine("\n");
-        //        Console.WriteLine(" Resultado da pesquisa:\n ");
-
-        //        Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
-        //        Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-        //        Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
-        //        Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-        //        Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-        //        Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
-        //        Console.WriteLine();
-        //        Console.Write(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    });
-        //    if (clientesEncontradosPorCpf.Count == 0)
-        //    {
-        //        Console.WriteLine("\n");
-        //        Console.WriteLine($" CPF {Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00")} não encontrado!");
-        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        MenuInicialCliente.CabecalhoMenuCliente();
-        //    }
-        //}
 
         public void CadastrarCliente()
         {

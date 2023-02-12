@@ -69,7 +69,7 @@ namespace RoadMap.Clientes.MenuCliente
             clientesEncontrados.ForEach(cliente =>
             {
                 Console.WriteLine("\n");
-                Console.WriteLine(" Resultado da pesquisa:\n ");
+                Console.WriteLine("Resultado da pesquisa:\n ");
 
                 Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
@@ -78,7 +78,7 @@ namespace RoadMap.Clientes.MenuCliente
                 Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
                 Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
                 Console.WriteLine();
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
+                Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
                 MenuInicialCliente.CabecalhoMenuCliente();
             });
