@@ -8,54 +8,53 @@ namespace RoadMap.Clientes.MenuCliente
     {
         public static Function function = new Function();
 
-
         public static void CabecalhoMenuCliente()
         {
             string opcao = string.Empty;
             do
             {
-                DrawScreen();
+                MenuAbertura.DrawScreen();
                 WriteOptions();
 
             } while (opcao != "5");
         }
 
 
-        public static void DrawScreen()
-        {
-            Console.Clear();
+        //public static void DrawScreen()
+        //{
+        //    Console.Clear();
 
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-            Console.Write("\n");
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //    Console.Write("\n");
 
-            for (int lines = 0; lines <= 20; lines++)
-            {
-                Console.Write("|");
-                for (int i = 0; i <= 80; i++)
-                {
-                    Console.Write(" ");
-                }
-                Console.Write("|");
-                Console.Write("\n");
-            }
+        //    for (int lines = 0; lines <= 20; lines++)
+        //    {
+        //        Console.Write("|");
+        //        for (int i = 0; i <= 80; i++)
+        //        {
+        //            Console.Write(" ");
+        //        }
+        //        Console.Write("|");
+        //        Console.Write("\n");
+        //    }
 
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-        }
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //}
 
         public static void WriteOptions()
         {
             Console.SetCursorPosition(32, 1);
-            Console.WriteLine(" Controle de Cliente  ");
+            Console.WriteLine("Controle de Cliente");
             Console.SetCursorPosition(1, 2);
             for (int i = 0; i <= 80; i++)
             {
@@ -94,14 +93,15 @@ namespace RoadMap.Clientes.MenuCliente
                     Console.WriteLine(" ======================================================");
                     Console.WriteLine(" |                 Cadastrar  Cliente                 |");
                     Console.WriteLine(" ======================================================\n");
-                    function.CadastrarCliente();
+                    Controller.CadastrarCliente.WriteOptions();
+                    //function.CadastrarCliente();
                     break;
                 case "3":
                     Console.Clear();
                     Console.WriteLine(" ======================================================");
                     Console.WriteLine(" |                 Editar Cliente                     |");
                     Console.WriteLine(" ======================================================\n");
-                    function.EditarCliente(nome);
+                    Controller.EditarCliente.WriteOptions();
                     break;
                 case "4":
                     Console.Clear();

@@ -1,4 +1,6 @@
 ﻿using RoadMap.Clientes.Validacoes;
+using RoadMap.Controller;
+using RoadMap.MenuInicial;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,40 +22,40 @@ namespace RoadMap.Clientes.MenuCliente
             do
             {
                 Console.Clear();
-                DrawScreen();
+                MenuAbertura.DrawScreen();
                 WriteOptions();
                 
             } while (opcao != "4");
         }
 
-        public static void DrawScreen()
-        {
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-            Console.Write("\n");
+        //public static void DrawScreen()
+        //{
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //    Console.Write("\n");
 
-            for (int lines = 0; lines <= 20; lines++)
-            {
-                Console.Write("|");
-                for (int i = 0; i <= 80; i++)
-                {
-                    Console.Write(" ");
-                }
-                Console.Write("|");
-                Console.Write("\n");
-            }
+        //    for (int lines = 0; lines <= 20; lines++)
+        //    {
+        //        Console.Write("|");
+        //        for (int i = 0; i <= 80; i++)
+        //        {
+        //            Console.Write(" ");
+        //        }
+        //        Console.Write("|");
+        //        Console.Write("\n");
+        //    }
 
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-        }
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //}
 
         public static void WriteOptions()
         {
@@ -103,7 +105,7 @@ namespace RoadMap.Clientes.MenuCliente
                     Console.Write("Pressione qualquer tecla para prosseguir.");
                     Console.ReadKey();
                     Console.Clear();
-                    DrawScreen();
+                    MenuAbertura.DrawScreen();
                     WriteOptions();
                     break;
             }

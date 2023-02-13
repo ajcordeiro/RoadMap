@@ -10,12 +10,12 @@ namespace RoadMap.Clientes
 {
     public interface ICliente
     {
-        public void CadastrarCliente();
+       // public void CadastrarCliente();
 
        // void GetNome(string nome);
         //void GetCpf(string cpf);
         //void GetAllClientes();
-        void EditarCliente(string nome);
+       // void EditarCliente(string nome);
         void DeletarCliente();
 
     }

@@ -1,9 +1,5 @@
 ﻿using RoadMap.MenuInicial;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoadMap.Clientes.MenuCliente
 {
@@ -20,8 +16,6 @@ namespace RoadMap.Clientes.MenuCliente
                 sair = Console.ReadLine().ToString().ToUpper();
                 if (opcao == "5" & sair == "S")
                     sair = "5";
-                else
-                    sair = sair;
 
                 switch (sair)
                 {

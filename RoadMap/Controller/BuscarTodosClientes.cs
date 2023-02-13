@@ -1,13 +1,15 @@
-﻿using RoadMap.Clientes.Model;
+﻿using RoadMap.Clientes.MenuCliente;
+using RoadMap.Clientes.Model;
+using RoadMap.MenuInicial;
 using System;
 
-namespace RoadMap.Clientes.MenuCliente
+namespace RoadMap.Controller
 {
     public class BuscarTodosClientes
     {
         public static void BuscarTodos()
         {
-            DrawScreen();
+            MenuAbertura.DrawScreen();
             WriteOptions();
         }
         public static void GetAll(string all)
@@ -18,12 +20,12 @@ namespace RoadMap.Clientes.MenuCliente
 
             foreach (var cliente in clientesNaoEncontrados)
             {
-                Console.WriteLine($" Cliente: {(cliente.Nome).ToUpper()}");
+                Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
-                Console.WriteLine($" Email: {(cliente.Email).ToUpper()}");
+                Console.WriteLine($" Email: {cliente.Email.ToUpper()}");
                 Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {(cliente.Endereco).ToUpper()} - Complemento: {(cliente.Complemento).ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {(cliente.Bairro).ToUpper()} - Cidade: {(cliente.Cidade).ToLower()}");
+                Console.WriteLine($" Endereço: {cliente.Endereco.ToUpper()} - Complemento: {cliente.Complemento.ToUpper()}");
+                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {cliente.Bairro.ToUpper()} - Cidade: {cliente.Cidade.ToLower()}");
                 Console.WriteLine();
                 Console.WriteLine("------------------------------------------------------");
             }
@@ -43,36 +45,36 @@ namespace RoadMap.Clientes.MenuCliente
             }
         }
 
-        public static void DrawScreen()
-        {
-            Console.Clear();
+        //public static void DrawScreen()
+        //{
+        //    Console.Clear();
 
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-            Console.Write("\n");
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //    Console.Write("\n");
 
-            for (int lines = 0; lines <= 20; lines++)
-            {
-                Console.Write("|");
-                for (int i = 0; i <= 80; i++)
-                {
-                    Console.Write(" ");
-                }
-                Console.Write("|");
-                Console.Write("\n");
-            }
+        //    for (int lines = 0; lines <= 20; lines++)
+        //    {
+        //        Console.Write("|");
+        //        for (int i = 0; i <= 80; i++)
+        //        {
+        //            Console.Write(" ");
+        //        }
+        //        Console.Write("|");
+        //        Console.Write("\n");
+        //    }
 
-            Console.Write("+");
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("-");
-            }
-            Console.Write("+");
-        }
+        //    Console.Write("+");
+        //    for (int i = 0; i <= 80; i++)
+        //    {
+        //        Console.Write("-");
+        //    }
+        //    Console.Write("+");
+        //}
 
         public static void WriteOptions()
         {

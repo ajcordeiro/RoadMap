@@ -9,7 +9,6 @@ namespace RoadMap.Controller
     {
         Cliente cliente1 = new Cliente();
 
-        bool clientesEncontradosPorCpf = true;
         public ClienteController()
         {
            
