@@ -1,4 +1,5 @@
 ﻿using RoadMap.Clientes.MenuCliente;
+using RoadMap.Clientes.Model;
 using RoadMap.Clientes.Validacoes;
 using RoadMap.MenuInicial;
 using System;
@@ -16,6 +17,7 @@ namespace RoadMap.Controller
             string nome = string.Empty;
             string cpf = string.Empty;
             string telefone = string.Empty;
+            string celular = string.Empty;
             string email = string.Empty;
             string endereco = string.Empty;
             string complemento = string.Empty;
@@ -23,79 +25,123 @@ namespace RoadMap.Controller
             string bairro = string.Empty;
             string cidade = string.Empty;
 
+            Console.SetCursorPosition(2, 4);
+            Console.Write("CPF:");
+
+            Console.SetCursorPosition(2, 6);
+            Console.Write("Nome:");
+
+            Console.SetCursorPosition(39, 6);
+            Console.Write("Email:");
+
+            Console.SetCursorPosition(2, 8);
+            Console.Write("Telefone:");
+
+            Console.SetCursorPosition(39, 8);
+            Console.Write("Celular:");
+
+            Console.SetCursorPosition(2, 10);
+            Console.Write("Endereço:");
+
+            Console.SetCursorPosition(2, 12);
+            Console.Write("Complemento:");
+
+            Console.SetCursorPosition(39, 12);
+            Console.Write("Cep:");
+
+            Console.SetCursorPosition(2, 14);
+            Console.Write("Bairro:");
+
+            Console.SetCursorPosition(39, 14);
+            Console.Write("Cidade:");
+
             do
             {
-                Console.SetCursorPosition(2, 4);
-                Console.Write("Digite o nome: ");
-                nome = ValidacoesCliente.LerLetras();
-                nome = nome.Trim().ToLower();
-
-            } while (!ValidacoesCliente.ValidaCampoVazio(nome));
-
-            do
-            {
-                Console.SetCursorPosition(2, 6);
-                Console.Write("Digite o CPF: ");
+                Console.SetCursorPosition(7, 4);
                 cpf = ValidacoesCliente.lerNumeros();
+            }
+            while (!ValidacoesCliente.ValidarCPF(cpf));
 
-            } while (!ValidacoesCliente.ValidarCPF(cpf));
-
-            do
-            {
-                Console.SetCursorPosition(2, 2);
-                Console.Write(" Digite o telefone: ");
-                telefone = ValidacoesCliente.lerNumeros();
-
-            } while (string.IsNullOrEmpty(telefone));
+            Console.SetCursorPosition(7, 4);
+            Console.Write(Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00"));
 
             do
             {
-                Console.SetCursorPosition(2, 8);
-                Console.Write(" Digite email: ");
+                Console.SetCursorPosition(8, 6);
+                nome = ValidacoesCliente.LerLetras();
+                nome = nome.ToLower().Trim();
+
+            } while (string.IsNullOrEmpty(nome) || nome.Length < 5);
+
+            Console.SetCursorPosition(8, 6);
+            Console.Write(nome);
+
+            do
+            {
+                Console.SetCursorPosition(46, 6);
                 email = Console.ReadLine().ToString();
 
             } while (!ValidacoesCliente.ValidarEmail(email));
 
+            Console.SetCursorPosition(12, 8);
+            telefone = ValidacoesCliente.lerNumeros();
+            if (string.IsNullOrEmpty(telefone.TrimStart()))
+            {
+                telefone = "0000000000";
+                Console.SetCursorPosition(12, 8);
+                Console.Write(Convert.ToUInt64(telefone).ToString(@"(00)0000\-0000"));
+            }
+
             do
             {
-                Console.SetCursorPosition(2, 10);
-                Console.Write(" Digite o endereço: ");
+                Console.SetCursorPosition(48, 8);
+                celular = ValidacoesCliente.lerNumeros();
+
+            } while (string.IsNullOrEmpty(celular) || celular.Length < 11);
+
+            Console.SetCursorPosition(48, 8);
+            Console.Write(Convert.ToUInt64(celular).ToString(@"(00)00000\-0000"));
+
+            do
+            {
+                Console.SetCursorPosition(12, 10);
                 endereco = Console.ReadLine().ToString();
 
-            } while (string.IsNullOrEmpty(endereco.TrimStart()));
+            } while (string.IsNullOrEmpty(endereco.TrimStart()) || endereco.Length < 5);
 
-            Console.SetCursorPosition(2, 12);
-            Console.Write(" Digite o complemento: ");
+            Console.SetCursorPosition(15, 12);
             complemento = Console.ReadLine().ToString();
-
             if (string.IsNullOrEmpty(complemento.TrimStart()))
+            {
                 complemento = "NA";
+                Console.SetCursorPosition(15, 12);
+                Console.Write(complemento);
+            }
 
             do
             {
-                Console.SetCursorPosition(2, 14);
-                Console.Write(" Digite o cep: ");
-                cep = ValidacoesCliente.lerNumeros();;
+                Console.SetCursorPosition(44, 12);
+                cep = ValidacoesCliente.lerNumeros();
 
-            } while (string.IsNullOrEmpty(cep));
+            } while (string.IsNullOrEmpty(cep) || cep.Length < 8);
+
+            Console.SetCursorPosition(44, 12);
+            Console.WriteLine(Convert.ToUInt64(cep).ToString(@"00000\-000"));
 
             do
             {
-                Console.SetCursorPosition(2, 16);
-                Console.Write(" Digite o bairro: ");
+                Console.SetCursorPosition(10, 14);
                 bairro = ValidacoesCliente.LerLetras();
-
-            } while (string.IsNullOrEmpty(bairro.TrimStart()));
+            } while (string.IsNullOrEmpty(bairro.TrimStart()) || bairro.Length < 5);
 
             do
             {
-                Console.SetCursorPosition(2, 18);
-                Console.Write(" Digite a cidade: ");
+                Console.SetCursorPosition(47, 14);
                 cidade = ValidacoesCliente.LerLetras();
+            } while (string.IsNullOrEmpty(cidade.TrimStart()) || cidade.Length < 5);
 
-            } while (string.IsNullOrEmpty(cidade.TrimStart()));
 
-            ClienteController clienteController = new ClienteController(nome, cpf, telefone, email, endereco, complemento, cep, bairro, cidade);
+            ClienteController clienteController = new ClienteController(nome, cpf, telefone, celular, email, endereco, complemento, cep, bairro, cidade);
 
             if (clienteController.CadastrarCliente(clienteController))
             {

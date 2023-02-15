@@ -23,7 +23,7 @@ namespace RoadMap.Controller
                 Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}");
                 Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
                 Console.WriteLine($" Email: {cliente.Email.ToUpper()}");
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)00000\-0000")}");
+                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)0000\-0000")} - Celular: {Convert.ToUInt64(cliente.Celular).ToString(@"(00)00000\-0000")}");
                 Console.WriteLine($" Endereço: {cliente.Endereco.ToUpper()} - Complemento: {cliente.Complemento.ToUpper()}");
                 Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {cliente.Bairro.ToUpper()} - Cidade: {cliente.Cidade.ToLower()}");
                 Console.WriteLine();

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace RoadMap.Clientes.Validacoes
@@ -47,8 +49,9 @@ namespace RoadMap.Clientes.Validacoes
                             break;
                         case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.W) ||
                                                   (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)):
-                            
+
                             entrada += cki.KeyChar;
+
                             Console.Write(cki.KeyChar);
                             break;
                     }
@@ -76,19 +79,24 @@ namespace RoadMap.Clientes.Validacoes
                             break;
                         case ConsoleKey.Enter:
                             continuarLoop = false;
-                            //entrada;
                             break;
                         case ConsoleKey key when ((ConsoleKey.D0 <= key) && (key <= ConsoleKey.D9) ||
                                                   (ConsoleKey.NumPad0 <= key) && (key <= ConsoleKey.NumPad9)):
                             entrada += cki.KeyChar;
-                            Console.Write(cki.KeyChar);
+
+                            if (entrada.Length < 12)
+                            {
+                                entrada.Append(cki.KeyChar);
+                                Console.Write(cki.KeyChar);
+                            }
+                            else
+                            {
+                                entrada = entrada.Remove(entrada.Length - 1);
+                            }
+                            // Console.Write(cki.KeyChar);
                             break;
                     }
                 }
-            if (string.IsNullOrEmpty(entrada))
-            {
-                Console.WriteLine(" Campo não pode Ser Nullo !");
-            }
             return entrada;
         }
 
@@ -110,7 +118,8 @@ namespace RoadMap.Clientes.Validacoes
             }
             else if (cpf.Length != 11)
             {
-                Console.WriteLine(" CPF Inválido!");
+                Console.SetCursorPosition(7, 4);
+                Console.WriteLine("Inválido!");
                 return false;
             }
 
@@ -148,18 +157,47 @@ namespace RoadMap.Clientes.Validacoes
             return cpf.EndsWith(digito);
         }
 
-        public static bool ValidaCampoVazio(string campo)
-        {
-            bool valida = true;
+        //public static bool ValidaCampoVazio(string campo)
+        //{
+        //    bool valida = true;
 
-            if (string.IsNullOrEmpty(campo))
+        //    if (string.IsNullOrEmpty(campo))
+        //    {
+        //        Console.WriteLine(" Campo não pode ser nulo!.");
+        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        return false;
+        //    }
+        //    return valida;
+        //}
+
+        public static string ValidaQuantidadeDeCaracteres()
+        {
+            StringBuilder sb = new StringBuilder();
+            bool loop = true;
+            while (loop)
             {
-                Console.WriteLine(" Campo não pode ser nulo!.");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                return false;
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // won't show up in console
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {
+                            loop = false;
+                            break;
+                        }
+                    default:
+                        {
+                            if (sb.Length < 200)
+                            {
+                                sb.Append(keyInfo.KeyChar);
+                                Console.Write(keyInfo.KeyChar);
+                            }
+                            break;
+                        }
+                }
             }
-            return valida;
+
+            return sb.ToString();
         }
     }
 }

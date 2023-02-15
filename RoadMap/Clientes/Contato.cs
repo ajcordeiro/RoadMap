@@ -5,6 +5,7 @@ namespace RoadMap.Clientes
     public abstract class Contato
     {
         public string Telefone { get; set; }
+        public string Celular { get; set; }
         public string Endereco { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }
