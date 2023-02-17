@@ -9,7 +9,8 @@ namespace RoadMap
         static void Main(string[] args)
         {
             Console.Clear();
-            MenuAbertura.DrawScreen();
+            //Tela.DrawScreen();
+
             MenuAbertura.WriteOptions();
         }
     }

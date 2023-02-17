@@ -20,7 +20,7 @@ namespace RoadMap.Controller
             cliente1.DataAlteracao = DateTime.Now;
         }
 
-        public ClienteController(string nome, string cpf, string telefone,string celular, string email, string endereco, string complemento, string cep, string bairro, string cidade)
+        public ClienteController(string nome, string cpf, string telefone,string celular, string email, string endereco, string numero, string complemento, string cep, string bairro, string cidade)
         {
             cliente1.Nome = nome;
             cliente1.Cpf = cpf;
@@ -28,6 +28,7 @@ namespace RoadMap.Controller
             cliente1.Celular = celular;
             cliente1.Email = email;
             cliente1.Endereco = endereco;
+            cliente1.Numero = numero;
             cliente1.Complemento = complemento;
             cliente1.Cep = cep;
             cliente1.Bairro = bairro;

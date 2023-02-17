@@ -16,7 +16,7 @@ namespace RoadMap.Clientes
         //void GetCpf(string cpf);
         //void GetAllClientes();
        // void EditarCliente(string nome);
-        void DeletarCliente();
+       // void DeletarCliente();
 
     }
 }

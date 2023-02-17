@@ -1,33 +1,52 @@
 ﻿using RoadMap.Clientes.MenuCliente;
 using RoadMap.Clientes.Model;
 using RoadMap.Clientes.Validacoes;
-using RoadMap.MenuInicial;
+using RoadMap.Menu;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoadMap.Controller
 {
     public class EditarCliente
     {
-        public EditarCliente()
+        static string titulo = "Editar Cliente";
+        public static void WriteOptions()
         {
-            
+            string nome = string.Empty;
+
+            Tela.DrawScreen();
+
+            Console.SetCursorPosition(32, 1);
+            Console.WriteLine(titulo);
+
+            do
+            {
+                Console.SetCursorPosition(2, 6);
+                Console.Write("Digite o Nome: ");
+
+                nome = ValidacoesCliente.LerLetras();
+                nome = nome.TrimStart().ToUpper();
+
+                if (nome != "ESC" && nome != "F12")
+                    EditCliente(nome);
+                else 
+                    MenuOptions(nome);
+
+            } while (string.IsNullOrEmpty(nome) || nome.Length < 5);
         }
+
         public static void EditCliente(string nomePesquisado)
         {
             string nomeEditado = string.Empty;
             string telefoneEditado = string.Empty;
-            
+
             var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nomePesquisado)).ToList();
             clientesEncontrados.ForEach(cliente =>
             {
-                Console.SetCursorPosition(1, 5);
-                Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}\n");
-                Console.SetCursorPosition(1, 6);
-                Console.Write(" Digite alteração para o nome: ");
+                Console.SetCursorPosition(2, 5);
+                Console.Write($"Cliente: {cliente.Nome.ToUpper()}\n");
+                Console.SetCursorPosition(2, 6);
+                Console.Write("Digite alteração para o nome:");
                 nomeEditado = Console.ReadLine().ToString();
 
                 if (string.IsNullOrEmpty(nomeEditado))
@@ -35,54 +54,52 @@ namespace RoadMap.Controller
                 else
                     cliente.Nome = nomeEditado;
 
-                Console.WriteLine($"Cliente: {cliente.Nome}");
-                Console.WriteLine($" CPF:{Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
+                Console.WriteLine($"Cliente:{cliente.Nome}");
+                Console.WriteLine($"CPF:{Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
 
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)\0000\-0000")}");
-                Console.WriteLine(" Digite alteração para o Telefone: ");
+                Console.WriteLine($"Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)\0000\-0000")}");
+                Console.WriteLine("Digite alteração para o Telefone: ");
                 telefoneEditado = Console.ReadLine().ToString();
 
                 if (string.IsNullOrEmpty(telefoneEditado))
                     telefoneEditado = cliente.Telefone;
                 else
                     cliente.Telefone = telefoneEditado;
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)\0000\-0000")}");
+                Console.WriteLine($"Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)\0000\-0000")}");
             });
             if (clientesEncontrados.Count == 0)
             {
-                Console.WriteLine("\n");
-                Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} não encontrado!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.SetCursorPosition(2, 6);
+                Console.Write($"Cliente {nomePesquisado.ToUpper()} não encontrado!");
+                Console.SetCursorPosition(2, 7);
+                Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                Console.Clear();
+                MenuInicialCliente.WriteOptions();
             }
             else
             {
-                Console.WriteLine($" Cliente {nomeEditado.ToUpper()} alterado com sucesso!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine($"Cliente {nomeEditado.ToUpper()} alterado com sucesso!");
+                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                Console.Clear();
+                MenuInicialCliente.WriteOptions();
             }
         }
 
-        public static void WriteOptions()
+        private static void MenuOptions(string opcao)
         {
-            MenuAbertura.DrawScreen();
-
-            Console.SetCursorPosition(32, 1);
-            Console.WriteLine("Editar Cliente");
-            Console.SetCursorPosition(1, 2);
-            for (int i = 0; i <= 80; i++)
+            switch (opcao)
             {
-                Console.Write("=");
-            }
-            Console.SetCursorPosition(2, 4);
-            Console.Write("Pesquisar Nome: ");
+                case "F12":
+                    Console.Clear();
+                    MenuInicialCliente.WriteOptions();
+                    break;
 
-
-            string opcao = ValidacoesCliente.LerLetras();
-            EditCliente(opcao);
-            // HandleMenuOptions(opcao);
+                case "ESC":
+                    MenuSair.ExitMenu(titulo);
+                    break;
+            } 
         }
     }
 }

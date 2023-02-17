@@ -11,51 +11,18 @@ namespace RoadMap.Controller
     {
         public static void PesquisarCPF()
         {
-            MenuAbertura.DrawScreen();
+            Tela.DrawScreen();
             WriteOptions();
         }
-
-        //public static void DrawScreen()
-        //{
-        //    Console.Clear();
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //    Console.Write("\n");
-
-        //    for (int lines = 0; lines <= 20; lines++)
-        //    {
-        //        Console.Write("|");
-        //        for (int i = 0; i <= 80; i++)
-        //        {
-        //            Console.Write(" ");
-        //        }
-        //        Console.Write("|");
-        //        Console.Write("\n");
-        //    }
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //}
-
+                
         public static void WriteOptions()
         {
             Console.SetCursorPosition(32, 1);
             Console.WriteLine("Pesquisar por CPF");
-            Console.SetCursorPosition(1, 2);
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("=");
-            }
-            Console.SetCursorPosition(2, 4);
+
+           // MenuAbertura.header();
+
+            Console.SetCursorPosition(2, 6);
             Console.Write("Digite sua opção: ");
 
             string cpf = ValidacoesCliente.lerNumeros();
@@ -71,12 +38,12 @@ namespace RoadMap.Controller
                 Console.WriteLine("\n");
                 Console.WriteLine("Resultado da pesquisa:\n");
 
+                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")} - Data do Cadastro: {cliente.DataCadastro}");
                 Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}");
-                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")}");
                 Console.WriteLine($" Email: {cliente.Email.ToUpper()}");
                 Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)0000\-0000")} - Celular: {Convert.ToUInt64(cliente.Celular).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {cliente.Endereco.ToUpper()} - Complemento: {cliente.Complemento.ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {cliente.Bairro.ToUpper()} - Cidade: {cliente.Cidade.ToLower()}");
+                Console.WriteLine($" Endereço: {cliente.Endereco.ToUpper()} -  Nº: {cliente.Numero} - Complemento: {cliente.Complemento.ToUpper()}");
+                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {cliente.Bairro.ToUpper()} - Cidade: {cliente.Cidade.ToUpper()}");
                 Console.WriteLine();
                 Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();

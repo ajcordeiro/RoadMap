@@ -1,4 +1,5 @@
 ﻿using RoadMap.Clientes.Validacoes;
+using RoadMap.Menu;
 using RoadMap.MenuInicial;
 using System;
 
@@ -7,120 +8,73 @@ namespace RoadMap.Clientes.MenuCliente
     public class MenuInicialCliente : IMenu
     {
         public static Function function = new Function();
-
-        public static void CabecalhoMenuCliente()
-        {
-            string opcao = string.Empty;
-            do
-            {
-                MenuAbertura.DrawScreen();
-                WriteOptions();
-
-            } while (opcao != "5");
-        }
+        static string titulo = "Controle de Cliente";
 
 
-        //public static void DrawScreen()
-        //{
-        //    Console.Clear();
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //    Console.Write("\n");
-
-        //    for (int lines = 0; lines <= 20; lines++)
-        //    {
-        //        Console.Write("|");
-        //        for (int i = 0; i <= 80; i++)
-        //        {
-        //            Console.Write(" ");
-        //        }
-        //        Console.Write("|");
-        //        Console.Write("\n");
-        //    }
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //}
 
         public static void WriteOptions()
         {
+            Tela.DrawScreen();
+
             Console.SetCursorPosition(32, 1);
-            Console.WriteLine("Controle de Cliente");
-            Console.SetCursorPosition(1, 2);
-            for (int i = 0; i <= 80; i++)
-            {
-                Console.Write("=");
-            }
-            Console.SetCursorPosition(2, 4);
-            Console.WriteLine("1 - Pesquisar Cliente");
-            Console.SetCursorPosition(2, 5);
-            Console.WriteLine("2 - Cadastrar");
+            Console.WriteLine(titulo);
+
             Console.SetCursorPosition(2, 6);
-            Console.WriteLine("3 - Editar");
+            Console.WriteLine("1 - Cadastrar");
             Console.SetCursorPosition(2, 7);
-            Console.WriteLine("4 - Deletar");
+            Console.WriteLine("2 - Editar");
             Console.SetCursorPosition(2, 8);
-            Console.WriteLine("5 - Sair ");
-            Console.SetCursorPosition(2, 10);
+            Console.WriteLine("3 - Deletar");
+            Console.SetCursorPosition(2, 9);
+            Console.WriteLine("4 - Pesquisar");
+            Console.SetCursorPosition(2, 11);
             Console.Write("Digite sua opção: ");
 
             string opcao = ValidacoesCliente.lerNumeros();
-            HandleMenuOptions(opcao);
+            MenuOptions(opcao);
         }
 
-        public static void HandleMenuOptions(string opcao)
+        private static void MenuOptions(string opcao)
         {
-            string nome = string.Empty;
-
             switch (opcao)
             {
                 case "1":
-                    // BuscarPorNome.PesquisarNome();
-                    MenuInicialPesquisaCliente.CabecalhoMenuPesquisar();
-                    //MenuInicialPesquisaCliente.CabecalhoMenuPesquisar();
+                    Console.Clear();
+                    Controller.CadastrarCliente.WriteOptions();
                     break;
+
                 case "2":
                     Console.Clear();
-                    Console.WriteLine(" ======================================================");
-                    Console.WriteLine(" |                 Cadastrar  Cliente                 |");
-                    Console.WriteLine(" ======================================================\n");
-                    Controller.CadastrarCliente.WriteOptions();
-                    //function.CadastrarCliente();
-                    break;
-                case "3":
-                    Console.Clear();
-                    Console.WriteLine(" ======================================================");
-                    Console.WriteLine(" |                 Editar Cliente                     |");
-                    Console.WriteLine(" ======================================================\n");
                     Controller.EditarCliente.WriteOptions();
                     break;
-                case "4":
+
+                case "3":
                     Console.Clear();
-                    Console.WriteLine(" ======================================================");
-                    Console.WriteLine(" |                 Deletar Cliente                    |");
-                    Console.WriteLine(" ======================================================\n");
-                    function.DeletarCliente();
+
+                    Controller.DeletarCliente.WriteOptions();
                     break;
-                case "5":
-                    SairMenu.SairDoMenuCliente(opcao);
+
+                case "4":
+                    MenuInicialPesquisaCliente.CabecalhoMenuPesquisar();
                     break;
+
+                case "F12":
+                    Console.Clear();
+                   
+                    MenuAbertura.WriteOptions();
+                    break;
+
+                case "ESC":
+                    MenuSair.ExitMenu(titulo);
+                    break;
+
                 default:
                     Console.WriteLine("\n");
                     Console.WriteLine(" Opção de menu inválida!");
                     Console.Write(" Pressione qualquer tecla para prosseguir.");
                     Console.ReadKey();
                     break;
-            } //while (opcao != "5") ;
+            }
         }
-
     }
 }

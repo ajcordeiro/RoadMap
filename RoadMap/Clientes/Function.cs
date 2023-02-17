@@ -172,27 +172,27 @@ namespace RoadMap.Clientes
         //        Console.WriteLine(" Erro ao cadastrar cliente!");
         //}
 
-        public void DeletarCliente()
-        {
-            string nomePesquisado = string.Empty;
+        //public void DeletarCliente()
+        //{
+        //    string nomePesquisado = string.Empty;
 
-            do
-            {
-                Console.WriteLine(" Digite o nome: ");
-                nomePesquisado = Console.ReadLine().ToString();
+        //    do
+        //    {
+        //        Console.WriteLine(" Digite o nome: ");
+        //        nomePesquisado = Console.ReadLine().ToString();
 
-            } while (string.IsNullOrEmpty(nomePesquisado));
+        //    } while (string.IsNullOrEmpty(nomePesquisado));
 
-            var deletarCliente = Cliente.ListaClientes.RemoveAll(cliente => cliente.Nome == nomePesquisado);
+        //    var deletarCliente = Cliente.ListaClientes.RemoveAll(cliente => cliente.Nome == nomePesquisado);
 
-            if (Cliente.ListaClientes != null)
-            {
-                Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
-            }
-        }
+        //    if (Cliente.ListaClientes != null)
+        //    {
+        //        Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
+        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+        //        Console.ReadKey();
+        //        MenuInicialCliente.CabecalhoMenuCliente();
+        //    }
+        //}
 
         
     }

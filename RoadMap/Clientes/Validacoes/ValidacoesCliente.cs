@@ -47,7 +47,15 @@ namespace RoadMap.Clientes.Validacoes
                         case ConsoleKey.Enter:
                             continuarLoop = false;
                             break;
-                        case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.W) ||
+                        case ConsoleKey.Escape:
+                            continuarLoop = false;
+                            entrada = "ESC";
+                            break;
+                        case ConsoleKey.F12:
+                            continuarLoop = false;
+                            entrada = "F12";
+                            break;
+                        case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.Z) ||
                                                   (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)):
 
                             entrada += cki.KeyChar;
@@ -79,6 +87,14 @@ namespace RoadMap.Clientes.Validacoes
                             break;
                         case ConsoleKey.Enter:
                             continuarLoop = false;
+                            break;
+                        case ConsoleKey.Escape:
+                            continuarLoop = false;
+                            entrada = "ESC";
+                            break;
+                        case ConsoleKey.F12:
+                            continuarLoop = false;
+                            entrada = "F12";
                             break;
                         case ConsoleKey key when ((ConsoleKey.D0 <= key) && (key <= ConsoleKey.D9) ||
                                                   (ConsoleKey.NumPad0 <= key) && (key <= ConsoleKey.NumPad9)):
@@ -118,8 +134,8 @@ namespace RoadMap.Clientes.Validacoes
             }
             else if (cpf.Length != 11)
             {
-                Console.SetCursorPosition(7, 4);
-                Console.WriteLine("Inválido!");
+                Console.SetCursorPosition(7, 5);
+                Console.Write("Inválido!");
                 return false;
             }
 
@@ -157,19 +173,85 @@ namespace RoadMap.Clientes.Validacoes
             return cpf.EndsWith(digito);
         }
 
-        //public static bool ValidaCampoVazio(string campo)
-        //{
-        //    bool valida = true;
+        public static string LerCampos()
+        {
+            ConsoleKeyInfo cki;
+            bool continuarLoop = true;
+            string entrada = string.Empty;
 
-        //    if (string.IsNullOrEmpty(campo))
-        //    {
-        //        Console.WriteLine(" Campo não pode ser nulo!.");
-        //        Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
-        //        Console.ReadKey();
-        //        return false;
-        //    }
-        //    return valida;
-        //}
+            while (continuarLoop)
+                if (Console.KeyAvailable)
+                {
+                    cki = Console.ReadKey(true);
+                    switch (cki.Key)
+                    {
+                        case ConsoleKey.Backspace:
+                            if (entrada.Length == 0)
+                                continue;
+                            entrada = entrada.Remove(entrada.Length - 1);
+                            Console.Write("\b \b"); //Remove o último caractere digitado
+                            break;
+                        case ConsoleKey.Enter:
+                            continuarLoop = false;
+                            break;
+                        case ConsoleKey.Escape:
+                            continuarLoop = false;
+                            entrada = "ESC";
+                            break;
+                        case ConsoleKey.F12:
+                            continuarLoop = false;
+                            entrada = "F12";
+                            break;
+                        case ConsoleKey key when ((ConsoleKey.A <= key) && (key <= ConsoleKey.Z) ||
+                                                  (ConsoleKey.F <= key) && (ConsoleKey.F24 <= key) ||
+                                                  (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)) ||
+                                                  ((ConsoleKey.D0 <= key) && (key <= ConsoleKey.D9) ||
+                                                  (ConsoleKey.NumPad0 <= key) && (key <= ConsoleKey.NumPad9)):
+
+                            
+                            entrada += cki.KeyChar;
+
+                            Console.Write(cki.KeyChar);
+                            break;
+                    }
+                }
+            return entrada;
+        }
+
+        public static string ValidaMenuSair()
+        {
+            ConsoleKeyInfo cki;
+            bool continuarLoop = true;
+            string entrada = string.Empty;
+            entrada = entrada.ToUpper();
+
+            while (continuarLoop)
+                if (Console.KeyAvailable)
+                {
+                    cki = Console.ReadKey(true);
+                    switch (cki.Key)
+                    {
+                        case ConsoleKey.Backspace:
+                            if (entrada.Length == 0)
+                                continue;
+                            entrada = entrada.Remove(entrada.Length - 1);
+                            Console.Write("\b \b"); //Remove o último caractere digitado
+                            break;
+                        case ConsoleKey.Enter:
+                            continuarLoop = false;
+                            break;
+
+                        case ConsoleKey key when ((ConsoleKey.S == key) || (ConsoleKey.N == key) ||
+                                                  (ConsoleKey.Backspace <= key) && (key <= ConsoleKey.Spacebar)):
+
+                            entrada += cki.KeyChar;
+
+                            Console.Write(cki.KeyChar);
+                            break;
+                    }
+                }
+            return entrada;
+        }
 
         public static string ValidaQuantidadeDeCaracteres()
         {
