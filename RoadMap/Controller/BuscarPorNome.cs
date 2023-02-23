@@ -1,94 +1,81 @@
-﻿using RoadMap.Clientes.MenuCliente;
+﻿using System;
+using System.Linq;
+using RoadMap.Menu;
 using RoadMap.Clientes.Model;
 using RoadMap.Clientes.Validacoes;
-using RoadMap.MenuInicial;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RoadMap.Clientes.MenuCliente;
+using RoadMap.View;
 
 namespace RoadMap.Controller
 {
     public class BuscarPorNome
     {
-        public static void PesquisarNome()
-        {
-            Tela.DrawScreen();
-            WriteOptions();
-        }
-        //public static void DrawScreen()
-        //{
-        //    Console.Clear();
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //    Console.Write("\n");
-
-        //    for (int lines = 0; lines <= 20; lines++)
-        //    {
-        //        Console.Write("|");
-        //        for (int i = 0; i <= 80; i++)
-        //        {
-        //            Console.Write(" ");
-        //        }
-        //        Console.Write("|");
-        //        Console.Write("\n");
-        //    }
-
-        //    Console.Write("+");
-        //    for (int i = 0; i <= 80; i++)
-        //    {
-        //        Console.Write("-");
-        //    }
-        //    Console.Write("+");
-        //}
+        static string titulo = "PESQUISAR POR NOME";
 
         public static void WriteOptions()
         {
-            Console.SetCursorPosition(32, 1);
-            Console.WriteLine("Pesquisar por nome");
+            string nome = string.Empty;
 
-          //  MenuAbertura.header();
+            Tela.DrawScreen(titulo);
 
             Console.SetCursorPosition(2, 6);
-            Console.Write("Digite sua opção: ");
+            Console.Write("Digite o nome: ");
 
-            string nome = ValidacoesCliente.LerLetras();
+            do
+            {
+                Console.SetCursorPosition(17, 6);
+                nome = ValidacoesCliente.LerLetras();
+                nome = nome.ToUpper().Trim();
+
+                if (nome == "ESC" || nome == "F12")
+                    MenuOptions(nome);
+
+            } while (string.IsNullOrEmpty(nome) || nome.Length < 5);
+
             GetNome(nome);
         }
 
-        public static void GetNome(string nome)
+        private static void MenuOptions(string opcao)
         {
+            switch (opcao)
+            {
+                case "ESC":
+                    MenuSair.ExitMenu(titulo);
+                    break;
+
+                case "F12":
+                    Console.Clear();
+                    MenuInicialCliente.WriteOptions();
+                    break;
+            }
+        }
+
+        private static void GetNome(string nome)
+        {
+            Tela.DrawScreen(titulo);
+
             var clientesEncontrados = Cliente.ListaClientes.Where(cliente => cliente.Nome.Contains(nome)).ToList();
 
             clientesEncontrados.ForEach(cliente =>
             {
-                Console.WriteLine("\n");
-                Console.WriteLine("Resultado da pesquisa:\n ");
+                Console.SetCursorPosition(2, 6);
+                Console.WriteLine("Nome Pesquisado:");
+                Console.SetCursorPosition(19, 6);
+                Console.Write(nome);
 
-                Console.WriteLine($" CPF: {Convert.ToUInt64(cliente.Cpf).ToString(@"000\.000\.000\-00")} - Data do Cadastro: {cliente.DataCadastro}");
-                Console.WriteLine($" Cliente: {cliente.Nome.ToUpper()}");
-                Console.WriteLine($" Email: {cliente.Email.ToUpper()}");
-                Console.WriteLine($" Telefone: {Convert.ToUInt64(cliente.Telefone).ToString(@"(00)0000\-0000")} - Celular: {Convert.ToUInt64(cliente.Celular).ToString(@"(00)00000\-0000")}");
-                Console.WriteLine($" Endereço: {cliente.Endereco.ToUpper()} -  Nº: {cliente.Numero} - Complemento: {cliente.Complemento.ToUpper()}");
-                Console.WriteLine($" Cep: {cliente.Cep} - Bairro: {cliente.Bairro.ToUpper()} - Cidade: {cliente.Cidade.ToUpper()}");
-                Console.WriteLine();
-                Console.Write("Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                BuscarCliente.ResultadoBuscarCliente(cliente.Cpf, cliente.Nome, cliente.DataCadastro, cliente.Email, cliente.Telefone, cliente.Celular,
+                    cliente.Endereco, cliente.Numero, cliente.Complemento, cliente.Cep, cliente.Bairro, cliente.Cidade);
+
+                SubMenuPesquisaCliente.WriteOptions();
             });
             if (clientesEncontrados.Count == 0)
             {
-                Console.WriteLine("\n");
-                Console.WriteLine($" Cliente:{nome.ToUpper()} não encontrado!");
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
+                Console.SetCursorPosition(2, 6);
+                Console.Write($"Cliente: {nome.ToUpper()} não encontrado!");
+                Console.SetCursorPosition(2, 20);
+                Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                SubMenuPesquisaCliente.WriteOptions();
             }
         }
     }

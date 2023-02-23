@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RoadMap
+namespace RoadMap.Menu
 {
     public class Tela
     {
-        public static void DrawScreen()
+        public static void DrawScreen(string titulo)
         {
+            Console.Clear();
+
             Console.Write("+");
             for (int i = 0; i <= 80; i++)
             {
@@ -37,11 +35,14 @@ namespace RoadMap
             }
             Console.Write("+");
 
-            header();
+            header(titulo);
         }
 
-        private static void header()
+        private static void header(string titulo)
         {
+            Console.SetCursorPosition(32, 1);
+            Console.WriteLine(titulo);
+
             Console.SetCursorPosition(70, 1);
             Console.Write(DateTime.Now.ToString("dd/MM/yyyy"));
             Console.SetCursorPosition(70, 2);

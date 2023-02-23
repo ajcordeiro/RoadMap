@@ -1,22 +1,17 @@
-﻿using RoadMap.Clientes.MenuCliente;
-using RoadMap.Clientes.Validacoes;
+﻿using System;
 using RoadMap.Menu;
-using RoadMap.MenuInicial;
-using System;
-using System.Diagnostics.Tracing;
+using RoadMap.Clientes.Validacoes;
+using RoadMap.Clientes.MenuCliente;
 
 namespace RoadMap.Controller
 {
     public class CadastrarCliente
     {
-        static string titulo = "Cadastrar Cliente";
+        private static string _titulo = "CASDASTRAR CLIENTE";
 
         public static void WriteOptions()
         {
-            Tela.DrawScreen();
-
-            Console.SetCursorPosition(32, 1);
-            Console.WriteLine(titulo);
+            Tela.DrawScreen(_titulo);
 
             AddCliente();
         }
@@ -34,55 +29,57 @@ namespace RoadMap.Controller
             string bairro = string.Empty;
             string cidade = string.Empty;
 
-            Console.SetCursorPosition(2, 5);
+            Console.SetCursorPosition(2, 6);
             Console.Write("CPF:");
 
-            Console.SetCursorPosition(2, 7);
+            Console.SetCursorPosition(2, 8);
             Console.Write("Nome:");
 
-            Console.SetCursorPosition(39, 7);
+            Console.SetCursorPosition(39, 8);
             Console.Write("Email:");
 
-            Console.SetCursorPosition(2, 9);
+            Console.SetCursorPosition(2, 10);
             Console.Write("Telefone:");
 
-            Console.SetCursorPosition(39, 9);
+            Console.SetCursorPosition(39, 10);
             Console.Write("Celular:");
 
-            Console.SetCursorPosition(2, 11);
+            Console.SetCursorPosition(2, 12);
             Console.Write("Endereço:");
 
-            Console.SetCursorPosition(39, 11);
+            Console.SetCursorPosition(39, 12);
             Console.Write("Nº:");
 
-            Console.SetCursorPosition(2, 13);
+            Console.SetCursorPosition(2, 14);
             Console.Write("Complemento:");
 
-            Console.SetCursorPosition(39, 13);
+            Console.SetCursorPosition(39, 14);
             Console.Write("Cep:");
 
-            Console.SetCursorPosition(2, 15);
+            Console.SetCursorPosition(2, 16);
             Console.Write("Bairro:");
 
-            Console.SetCursorPosition(39, 15);
+            Console.SetCursorPosition(39, 16);
             Console.Write("Cidade:");
 
             do
             {
-                Console.SetCursorPosition(7, 5);
-                cpf = ValidacoesCliente.lerNumeros();
+                Console.SetCursorPosition(7, 6);
+                cpf = ValidacoesCliente.LerNumeros();
 
                 if (cpf == "ESC" || cpf == "F12")
                     MenuOptions(cpf);
             }
             while (!ValidacoesCliente.ValidarCPF(cpf) || string.IsNullOrEmpty(cpf));
 
-            Console.SetCursorPosition(7, 5);
-            Console.Write(Convert.ToUInt64(cpf.ToUpper()).ToString(@"000\.000\.000\-00"));
+            string FormatarCpf(string Cpf) => cpf.Substring(0, 3) + "." + cpf.Substring(3, 3) + "." + cpf.Substring(6, 3) + "-" + cpf.Substring(9, 2);
+
+            Console.SetCursorPosition(7, 6);
+            Console.Write(FormatarCpf(cpf));
 
             do
             {
-                Console.SetCursorPosition(8, 7);
+                Console.SetCursorPosition(8, 8);
                 nome = ValidacoesCliente.LerLetras();
                 nome = nome.ToUpper().Trim();
 
@@ -91,12 +88,12 @@ namespace RoadMap.Controller
 
             } while (string.IsNullOrEmpty(nome) || nome.Length < 5);
 
-            Console.SetCursorPosition(8, 7);
+            Console.SetCursorPosition(8, 8);
             Console.Write(nome);
 
             do
             {
-                Console.SetCursorPosition(46, 7);
+                Console.SetCursorPosition(46, 8);
                 email = ValidacoesCliente.LerCampos();
 
                 if (email == "ESC" || email == "F12")
@@ -104,35 +101,44 @@ namespace RoadMap.Controller
 
             } while (!ValidacoesCliente.ValidarEmail(email));
 
-            Console.SetCursorPosition(12, 9);
-            telefone = ValidacoesCliente.lerNumeros();
+            Console.SetCursorPosition(12, 10);
+            telefone = ValidacoesCliente.LerNumeros();
 
             if (telefone == "ESC" || telefone == "F12")
                 MenuOptions(telefone);
 
             if (string.IsNullOrEmpty(telefone.TrimStart()))
             {
-                telefone = "0000000000";
-                Console.SetCursorPosition(12, 9);
-                Console.Write(Convert.ToUInt64(telefone).ToString(@"(00)0000\-0000"));
+                telefone = "000000000000";
+                string FormataTelefone(string Telefone) => "(" + telefone.Substring(0, 2) + ")" + telefone.Substring(2, 4) + "-" + telefone.Substring(6, 4);
+                Console.SetCursorPosition(12, 10);
+                Console.Write(FormataTelefone(telefone));
+            }
+            else
+            {
+                string FormataTelefone(string Telefone) => "(" + telefone.Substring(0, 2) + ")" + telefone.Substring(2, 4) + "-" + telefone.Substring(6, 4);
+                Console.SetCursorPosition(12, 10);
+                Console.Write(FormataTelefone(telefone));
             }
 
             do
             {
-                Console.SetCursorPosition(48, 9);
-                celular = ValidacoesCliente.lerNumeros();
+                Console.SetCursorPosition(48, 10);
+                celular = ValidacoesCliente.LerNumeros();
 
                 if (celular == "ESC" || celular == "F12")
                     MenuOptions(celular);
 
             } while (string.IsNullOrEmpty(celular) || celular.Length < 11);
 
-            Console.SetCursorPosition(48, 9);
-            Console.Write(Convert.ToUInt64(celular).ToString(@"(00)00000\-0000"));
+            string FormataCelular(string Celular) => "(" + celular.Substring(0, 2) + ")" + celular.Substring(2, 5) + "-" + celular.Substring(7, 4);
+
+            Console.SetCursorPosition(48, 10);
+            Console.Write(FormataCelular(celular));
 
             do
             {
-                Console.SetCursorPosition(12, 11);
+                Console.SetCursorPosition(12, 12);
                 endereco = Console.ReadLine().ToString();
 
                 if (endereco == "ESC" || endereco == "F12")
@@ -142,15 +148,15 @@ namespace RoadMap.Controller
 
             do
             {
-                Console.SetCursorPosition(43, 11);
-                numero = ValidacoesCliente.lerNumeros();
+                Console.SetCursorPosition(43, 12);
+                numero = ValidacoesCliente.LerNumeros();
 
                 if (numero == "ESC" || numero == "F12")
                     MenuOptions(numero);
 
             } while (string.IsNullOrEmpty(numero.TrimStart()) || numero.Length < 1);
 
-            Console.SetCursorPosition(15, 13);
+            Console.SetCursorPosition(15, 14);
             complemento = Console.ReadLine().ToString();
 
             if (complemento == "ESC" || complemento == "F12")
@@ -159,26 +165,28 @@ namespace RoadMap.Controller
             if (string.IsNullOrEmpty(complemento.TrimStart()))
             {
                 complemento = "NA";
-                Console.SetCursorPosition(15, 13);
+                Console.SetCursorPosition(15, 14);
                 Console.Write(complemento);
             }
 
             do
             {
-                Console.SetCursorPosition(44, 13);
-                cep = ValidacoesCliente.lerNumeros();
+                Console.SetCursorPosition(44, 14);
+                cep = ValidacoesCliente.LerNumeros();
 
                 if (cep == "ESC" || cep == "F12")
                     MenuOptions(cep);
 
             } while (string.IsNullOrEmpty(cep) || cep.Length < 8);
 
-            Console.SetCursorPosition(44, 13);
-            Console.WriteLine(Convert.ToUInt64(cep).ToString(@"00000\-000"));
+            string FormataCep(string Cep) => cep.Substring(0, 5) + "-" + cep.Substring(5, 3);
+            
+            Console.SetCursorPosition(44, 14);
+            Console.WriteLine(FormataCep(cep));
 
             do
             {
-                Console.SetCursorPosition(10, 15);
+                Console.SetCursorPosition(10, 16);
                 bairro = ValidacoesCliente.LerLetras();
 
                 if (bairro == "ESC" || bairro == "F12")
@@ -188,7 +196,7 @@ namespace RoadMap.Controller
 
             do
             {
-                Console.SetCursorPosition(47, 15);
+                Console.SetCursorPosition(47, 16);
                 cidade = ValidacoesCliente.LerLetras();
 
                 if (cidade == "ESC" || cidade == "F12")
@@ -205,7 +213,8 @@ namespace RoadMap.Controller
                 Console.SetCursorPosition(2, 21);
                 Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                Console.Clear();
+                MenuInicialCliente.WriteOptions();
             }
             else
             {
@@ -219,22 +228,12 @@ namespace RoadMap.Controller
             switch (opcao)
             {
                 case "ESC":
-                    MenuSair.ExitMenu(titulo);
+                    MenuSair.ExitMenu(_titulo);
                     break;
 
                 case "F12":
                     Console.Clear();
                     MenuInicialCliente.WriteOptions();
-                    break;
-
-                default:
-                    Console.WriteLine("\n");
-                    Console.WriteLine(" Opção de menu inválida!");
-                    Console.Write(" Pressione qualquer tecla para prosseguir.");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Tela.DrawScreen();
-
                     break;
             }
         }

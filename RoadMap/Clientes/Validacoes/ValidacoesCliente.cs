@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace RoadMap.Clientes.Validacoes
@@ -67,7 +66,7 @@ namespace RoadMap.Clientes.Validacoes
             return entrada;
         }
 
-        public static string lerNumeros()
+        public static string LerNumeros()
         {
             ConsoleKeyInfo cki;
             bool continuarLoop = true;
@@ -253,33 +252,8 @@ namespace RoadMap.Clientes.Validacoes
             return entrada;
         }
 
-        public static string ValidaQuantidadeDeCaracteres()
-        {
-            StringBuilder sb = new StringBuilder();
-            bool loop = true;
-            while (loop)
-            {
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // won't show up in console
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.Enter:
-                        {
-                            loop = false;
-                            break;
-                        }
-                    default:
-                        {
-                            if (sb.Length < 200)
-                            {
-                                sb.Append(keyInfo.KeyChar);
-                                Console.Write(keyInfo.KeyChar);
-                            }
-                            break;
-                        }
-                }
-            }
+       
+        
 
-            return sb.ToString();
-        }
     }
 }

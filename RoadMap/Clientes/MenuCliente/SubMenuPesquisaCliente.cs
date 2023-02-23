@@ -1,13 +1,13 @@
 ﻿using System;
 using RoadMap.Menu;
-using RoadMap.MenuInicial;
+using RoadMap.Controller;
 using RoadMap.Clientes.Validacoes;
 
 namespace RoadMap.Clientes.MenuCliente
 {
-    public class MenuInicialCliente : IMenu
+    public static class SubMenuPesquisaCliente
     {
-        private static string _titulo = "CONTROLE DE CLIENTE";
+        private static string _titulo = "PESQUISAR CLIENTE";
 
         public static void WriteOptions()
         {
@@ -18,51 +18,41 @@ namespace RoadMap.Clientes.MenuCliente
                 Tela.DrawScreen(_titulo);
 
                 Console.SetCursorPosition(2, 6);
-                Console.WriteLine("1 - Cadastrar");
+                Console.WriteLine("1 - Pesquisar por Nome");
                 Console.SetCursorPosition(2, 7);
-                Console.WriteLine("2 - Editar");
+                Console.WriteLine("2 - Pesquisar por CPF");
                 Console.SetCursorPosition(2, 8);
-                Console.WriteLine("3 - Deletar");
+                Console.WriteLine("3 - Pesquisar Todos");
                 Console.SetCursorPosition(2, 9);
-                Console.WriteLine("4 - Pesquisar");
                 Console.SetCursorPosition(2, 11);
                 Console.Write("Digite sua opção: ");
 
                 opcao = ValidacoesCliente.LerNumeros();
+               // if (opcao == "ESC" || opcao == "F12")
+                    MenuOptions(opcao);
 
-                MenuOptions(opcao);
-
-            } while (opcao != "4");
-
+            } while (opcao != "3");
         }
 
-        private static void MenuOptions(string opcao)
+        public static void MenuOptions(string opcao)
         {
             switch (opcao)
             {
                 case "1":
-                    Console.Clear();
-                    Controller.CadastrarCliente.WriteOptions();
+                    BuscarPorNome.WriteOptions();
                     break;
 
                 case "2":
-                    Console.Clear();
-                    Controller.EditarCliente.WriteOptions();
+                    BuscarPorCPF.WriteOptions();
                     break;
 
                 case "3":
-                    Console.Clear();
-                    Controller.DeletarCliente.WriteOptions();
-                    break;
-
-                case "4":
-                    Console.Clear();
-                    SubMenuPesquisaCliente.WriteOptions();
+                    BuscarTodosClientes.WriteOptions();
                     break;
 
                 case "F12":
                     Console.Clear();
-                    MenuAbertura.WriteOptions();
+                    MenuInicialCliente.WriteOptions();
                     break;
 
                 case "ESC":

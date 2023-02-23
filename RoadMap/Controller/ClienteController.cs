@@ -1,7 +1,6 @@
-﻿using RoadMap.Clientes;
-using RoadMap.Clientes.Model;
-using System;
+﻿using System;
 using System.Linq;
+using RoadMap.Clientes.Model;
 
 namespace RoadMap.Controller
 {
@@ -9,10 +8,6 @@ namespace RoadMap.Controller
     {
         Cliente cliente1 = new Cliente();
 
-        public ClienteController()
-        {
-           
-        }
         public ClienteController(string nome, string telefone)
         {
             cliente1.Nome = nome;

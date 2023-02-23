@@ -1,8 +1,8 @@
-﻿using RoadMap.Clientes.MenuCliente;
+﻿using System;
+using RoadMap.Menu;
 using RoadMap.Clientes.Model;
 using RoadMap.Clientes.Validacoes;
-using RoadMap.Menu;
-using System;
+using RoadMap.Clientes.MenuCliente;
 
 namespace RoadMap.Controller
 {
@@ -14,10 +14,7 @@ namespace RoadMap.Controller
         {
             string nome = string.Empty;
 
-            Tela.DrawScreen();
-
-            Console.SetCursorPosition(32, 1);
-            Console.WriteLine(titulo);
+            Tela.DrawScreen(titulo);
 
             do
             {
@@ -51,9 +48,9 @@ namespace RoadMap.Controller
             if (Cliente.ListaClientes != null)
             {
                 Console.WriteLine($" Cliente {nomePesquisado.ToUpper()} deletado com sucesso!");
-                Console.WriteLine(" Pressione qualquer tecla para prosseguir.");
+                Console.WriteLine("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.CabecalhoMenuCliente();
+                MenuInicialCliente.WriteOptions();
             }
         }
 

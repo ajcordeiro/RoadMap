@@ -1,6 +1,5 @@
-﻿using RoadMap.Clientes.Validacoes;
+﻿using System;
 using RoadMap.MenuInicial;
-using System;
 
 namespace RoadMap
 {
@@ -8,9 +7,7 @@ namespace RoadMap
     {
         static void Main(string[] args)
         {
-            Console.Clear();
-            //Tela.DrawScreen();
-
+           // Console.Clear();
             MenuAbertura.WriteOptions();
         }
     }

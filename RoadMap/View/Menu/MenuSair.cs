@@ -1,8 +1,8 @@
-﻿using RoadMap.Clientes.MenuCliente;
-using RoadMap.Clientes.Validacoes;
+﻿using System;
 using RoadMap.Controller;
 using RoadMap.MenuInicial;
-using System;
+using RoadMap.Clientes.Validacoes;
+using RoadMap.Clientes.MenuCliente;
 
 namespace RoadMap.Menu
 {
@@ -34,7 +34,7 @@ namespace RoadMap.Menu
                         if(titulo == "Menu Abertura")
                             MenuAbertura.WriteOptions();
 
-                        if(titulo == "Controle de Cliente" || titulo == "Editar Cliente" || titulo == "Deletar Cliente")
+                        if(titulo == "CONTROLE DE CLIENTE" || titulo == "PESQUISAR CLIENTE" || titulo == "Deletar Cliente")
                         MenuInicialCliente.WriteOptions();
 
                         if (titulo == "Cadastrar Cliente")

@@ -1,6 +1,4 @@
-﻿using RoadMap.Clientes.Model;
-
-namespace RoadMap.Clientes
+﻿namespace RoadMap.Clientes.Model
 {
     public abstract class Contato
     {
