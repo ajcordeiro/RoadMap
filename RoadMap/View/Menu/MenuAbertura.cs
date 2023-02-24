@@ -40,7 +40,7 @@ namespace RoadMap.MenuInicial
                     MenuInicialCliente.WriteOptions();
                     break;
                 case "2":
-                    WriteOptions(); // MAbertura(); //MenuInicialProduto.CabecalhoMenuProduto();
+                    WriteOptions();
                     break;
                 case "ESC":
                     MenuSair.ExitMenu(titulo);

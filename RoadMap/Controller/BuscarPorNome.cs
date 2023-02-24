@@ -33,6 +33,7 @@ namespace RoadMap.Controller
             } while (string.IsNullOrEmpty(nome) || nome.Length < 5);
 
             GetNome(nome);
+            SubMenuPesquisaCliente.WriteOptions();
         }
 
         private static void MenuOptions(string opcao)
@@ -65,9 +66,8 @@ namespace RoadMap.Controller
 
                 BuscarCliente.ResultadoBuscarCliente(cliente.Cpf, cliente.Nome, cliente.DataCadastro, cliente.Email, cliente.Telefone, cliente.Celular,
                     cliente.Endereco, cliente.Numero, cliente.Complemento, cliente.Cep, cliente.Bairro, cliente.Cidade);
-
-                SubMenuPesquisaCliente.WriteOptions();
             });
+
             if (clientesEncontrados.Count == 0)
             {
                 Console.SetCursorPosition(2, 6);
@@ -75,7 +75,6 @@ namespace RoadMap.Controller
                 Console.SetCursorPosition(2, 20);
                 Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                SubMenuPesquisaCliente.WriteOptions();
             }
         }
     }

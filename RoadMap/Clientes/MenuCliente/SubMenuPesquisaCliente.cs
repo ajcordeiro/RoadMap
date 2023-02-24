@@ -28,8 +28,8 @@ namespace RoadMap.Clientes.MenuCliente
                 Console.Write("Digite sua opção: ");
 
                 opcao = ValidacoesCliente.LerNumeros();
-               // if (opcao == "ESC" || opcao == "F12")
-                    MenuOptions(opcao);
+
+                MenuOptions(opcao);
 
             } while (opcao != "3");
         }

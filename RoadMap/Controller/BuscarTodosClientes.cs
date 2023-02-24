@@ -1,7 +1,6 @@
 ﻿using RoadMap.Clientes.MenuCliente;
 using RoadMap.Clientes.Model;
 using RoadMap.Menu;
-using RoadMap.MenuInicial;
 using RoadMap.View;
 using System;
 
@@ -14,20 +13,13 @@ namespace RoadMap.Controller
         public static void WriteOptions()
         {
             Tela.DrawScreen(titulo);
-
-            Console.SetCursorPosition(2, 6);
-            Console.Write("Digite sua opção: ");
-
-            string all = string.Empty;
-            GetAll(all);
+            GetAll();
+            SubMenuPesquisaCliente.WriteOptions();
         }
 
-        private static void GetAll(string all)
+        private static void GetAll()
         {
             var clientesNaoEncontrados = Cliente.ListaClientes;
-
-            Console.SetCursorPosition(2, 6);
-            Console.WriteLine("Resultado da pesquisa: ");
 
             foreach (var cliente in clientesNaoEncontrados)
             {
@@ -37,21 +29,12 @@ namespace RoadMap.Controller
 
             if (clientesNaoEncontrados.Count == 0)
             {
-                Console.SetCursorPosition(25, 6);
+                Console.SetCursorPosition(2, 6);
                 Console.Write("Clientes não cadastrados na base!");
                 Console.SetCursorPosition(2, 20);
                 Console.Write("Pressione qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                MenuInicialCliente.WriteOptions();
-            }
-            else
-            {
-                Console.SetCursorPosition(2, 20);
-                Console.Write(" Pressione qualquer tecla para prosseguir.");
-                Console.ReadKey();
-                MenuInicialCliente.WriteOptions();
             }
         }
-
     }
 }
